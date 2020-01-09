@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingsTest.iOS", "Binding
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingsTest", "BindingsTest\BindingsTest.csproj", "{FA03DC88-73AA-4BA9-AEA9-9A4916E8BF3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Droid.Sdk", "Droid.Sdk\Droid.Sdk.csproj", "{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +55,17 @@ Global
 		{FA03DC88-73AA-4BA9-AEA9-9A4916E8BF3B}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{FA03DC88-73AA-4BA9-AEA9-9A4916E8BF3B}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{FA03DC88-73AA-4BA9-AEA9-9A4916E8BF3B}.Release|iPhone.Build.0 = Release|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{9CCB6B62-12BD-42CB-9B8B-33368F3A6CBC}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

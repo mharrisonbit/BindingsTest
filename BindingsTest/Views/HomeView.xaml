@@ -3,4 +3,14 @@
   xmlns="http://xamarin.com/schemas/2014/forms"
   x:Class="BindingsTest.Views.HomeView"
              Title="{Binding Title}">
+    <Grid>
+      <Grid.RowDefinitions>
+          <RowDefinition Height="40"/>
+          <RowDefinition Height="20"/>
+          <RowDefinition Height="20"/>
+      </Grid.RowDefinitions>
+        <Button Text="Press me"
+                Grid.Row="0"
+                Command="{Binding BtnPrsd}"/>
+    </Grid>
 </ContentPage>

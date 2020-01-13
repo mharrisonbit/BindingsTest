@@ -61,6 +61,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SdkClasses\TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -87,11 +88,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="SdkClasses\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BindingsTest\BindingsTest.csproj">
       <Project>{FA03DC88-73AA-4BA9-AEA9-9A4916E8BF3B}</Project>
       <Name>BindingsTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Visio.Droid\Visio.Droid.csproj">
+      <Project>{E0878D53-2D04-49AD-84AB-DD2A42149936}</Project>
+      <Name>Visio.Droid</Name>
     </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -1,4 +1,5 @@
-﻿using Prism;
+﻿using BindingsTest.Interfaces;
+using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -28,6 +29,7 @@ namespace BindingsTest
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+
         }
     }
 }

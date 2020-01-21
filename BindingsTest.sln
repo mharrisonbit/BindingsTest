@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingsTest", "BindingsTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visio.Droid", "Visio.Droid\Visio.Droid.csproj", "{E0878D53-2D04-49AD-84AB-DD2A42149936}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIsio.iOS", "VIsio.iOS\VIsio.iOS.csproj", "{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,5 +69,17 @@ Global
 		{E0878D53-2D04-49AD-84AB-DD2A42149936}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{E0878D53-2D04-49AD-84AB-DD2A42149936}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{E0878D53-2D04-49AD-84AB-DD2A42149936}.Release|iPhone.Build.0 = Release|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,6 @@
 ﻿using Android.Util;
 using BindingsTest.Interfaces;
-using Com.Visioglobe;
+using viso = Com.Visioglobe;
 
 namespace BindingsTest.Droid.SdkClasses
 {

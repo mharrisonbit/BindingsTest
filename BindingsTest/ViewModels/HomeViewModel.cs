@@ -1,4 +1,3 @@
-using System;
 using BindingsTest.Interfaces;
 using Prism.Commands;
 using Prism.Navigation;
@@ -9,18 +8,18 @@ namespace BindingsTest.ViewModels
     {
         public DelegateCommand BtnPrsd { get; private set; }
 
-        private ISdkTest sdk;
+        private ISdkTest Sdk { get; }
 
         public HomeViewModel(INavigationService navigationService, ISdkTest sdk) : base(navigationService)
         {
             Title = "Hello";
             BtnPrsd = new DelegateCommand(Pressed);
-            this.sdk = sdk;
+            Sdk = sdk;
         }
 
         private void Pressed()
         {
-            sdk.Speak("Testing");
+            Sdk.Speak("Testing");
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

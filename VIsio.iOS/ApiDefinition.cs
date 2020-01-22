@@ -21,6 +21,7 @@ using Metal;
 using OpenGLES;
 using Security;
 using UserNotifications;
+using VisioMoveEssentialSdk;
 
 namespace NativeLibrary
 {

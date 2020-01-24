@@ -15,9 +15,8 @@ using ObjCRuntime;
 using OpenGLES;
 using Security;
 using UIKit;
-using NativeLibrary;
 
-namespace VisioMoveEssentialSdk
+namespace VIsio.iOS
 {
 	[StructLayout(LayoutKind.Explicit)]
 	public struct __darwin_mbstate_t

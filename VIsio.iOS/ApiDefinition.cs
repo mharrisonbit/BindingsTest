@@ -1,7 +1,4 @@
 ﻿using System;
-using ObjCRuntime;
-using Foundation;
-using UIKit;
 using AVFoundation;
 using CloudKit;
 using Contacts;
@@ -13,75 +10,21 @@ using CoreImage;
 using CoreLocation;
 using CoreVideo;
 using FileProvider;
+using Foundation;
 using IOSurface;
 using ImageIO;
 using Intents;
 using LinkPresentation;
 using Metal;
+using ObjCRuntime;
 using OpenGLES;
 using Security;
+using UIKit;
 using UserNotifications;
-using VisioMoveEssentialSdk;
+using VisioMoveEssential;
 
-namespace NativeLibrary
+namespace VisioMoveEssential
 {
-	// The first step to creating a binding is to add your native library ("libNativeLibrary.a")
-	// to the project by right-clicking (or Control-clicking) the folder containing this source
-	// file and clicking "Add files..." and then simply select the native library (or libraries)
-	// that you want to bind.
-	//
-	// When you do that, you'll notice that MonoDevelop generates a code-behind file for each
-	// native library which will contain a [LinkWith] attribute. VisualStudio auto-detects the
-	// architectures that the native library supports and fills in that information for you,
-	// however, it cannot auto-detect any Frameworks or other system libraries that the
-	// native library may depend on, so you'll need to fill in that information yourself.
-	//
-	// Once you've done that, you're ready to move on to binding the API...
-	//
-	//
-	// Here is where you'd define your API definition for the native Objective-C library.
-	//
-	// For example, to bind the following Objective-C class:
-	//
-	//     @interface Widget : NSObject {
-	//     }
-	//
-	// The C# binding would look like this:
-	//
-	//     [BaseType (typeof (NSObject))]
-	//     interface Widget {
-	//     }
-	//
-	// To bind Objective-C properties, such as:
-	//
-	//     @property (nonatomic, readwrite, assign) CGPoint center;
-	//
-	// You would add a property definition in the C# interface like so:
-	//
-	//     [Export ("center")]
-	//     CGPoint Center { get; set; }
-	//
-	// To bind an Objective-C method, such as:
-	//
-	//     -(void) doSomething:(NSObject *)object atIndex:(NSInteger)index;
-	//
-	// You would add a method definition to the C# interface like so:
-	//
-	//     [Export ("doSomething:atIndex:")]
-	//     void DoSomething (NSObject object, int index);
-	//
-	// Objective-C "constructors" such as:
-	//
-	//     -(id)initWithElmo:(ElmoMuppet *)elmo;
-	//
-	// Can be bound as:
-	//
-	//     [Export ("initWithElmo:")]
-	//     IntPtr Constructor (ElmoMuppet elmo);
-	//
-	// For more information, see https://aka.ms/ios-binding
-	//
-
 	[Static]
 	[Verify(ConstantsInterfaceAssociation)]
 	partial interface Constants
@@ -27654,1422 +27597,6 @@ namespace NativeLibrary
 		// @property (readonly, copy) NSString * _Nonnull UUIDString;
 		[Export("UUIDString")]
 		string UUIDString { get; }
-	}
-
-	[Static]
-	[Verify(ConstantsInterfaceAssociation)]
-	partial interface Constants
-	{
-		// extern NSString *const _Nonnull kCLErrorDomain __attribute__((visibility("default")));
-		[Field("kCLErrorDomain", "__Internal")]
-		NSString kCLErrorDomain { get; }
-	}
-
-	[Static]
-	[Verify(ConstantsInterfaceAssociation)]
-	partial interface Constants
-	{
-		// extern NSString *const _Nonnull kCLErrorUserInfoAlternateRegionKey __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=5.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, iOS(5, 0)]
-		[Field("kCLErrorUserInfoAlternateRegionKey", "__Internal")]
-		NSString kCLErrorUserInfoAlternateRegionKey { get; }
-	}
-
-	[Static]
-	[Verify(ConstantsInterfaceAssociation)]
-	partial interface Constants
-	{
-		// extern const CLLocationDistance kCLDistanceFilterNone __attribute__((visibility("default")));
-		[Field("kCLDistanceFilterNone", "__Internal")]
-		double kCLDistanceFilterNone { get; }
-
-		// extern const CLLocationAccuracy kCLLocationAccuracyBestForNavigation __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(4, 0)]
-		[Field("kCLLocationAccuracyBestForNavigation", "__Internal")]
-		double kCLLocationAccuracyBestForNavigation { get; }
-
-		// extern const CLLocationAccuracy kCLLocationAccuracyBest __attribute__((visibility("default")));
-		[Field("kCLLocationAccuracyBest", "__Internal")]
-		double kCLLocationAccuracyBest { get; }
-
-		// extern const CLLocationAccuracy kCLLocationAccuracyNearestTenMeters __attribute__((visibility("default")));
-		[Field("kCLLocationAccuracyNearestTenMeters", "__Internal")]
-		double kCLLocationAccuracyNearestTenMeters { get; }
-
-		// extern const CLLocationAccuracy kCLLocationAccuracyHundredMeters __attribute__((visibility("default")));
-		[Field("kCLLocationAccuracyHundredMeters", "__Internal")]
-		double kCLLocationAccuracyHundredMeters { get; }
-
-		// extern const CLLocationAccuracy kCLLocationAccuracyKilometer __attribute__((visibility("default")));
-		[Field("kCLLocationAccuracyKilometer", "__Internal")]
-		double kCLLocationAccuracyKilometer { get; }
-
-		// extern const CLLocationAccuracy kCLLocationAccuracyThreeKilometers __attribute__((visibility("default")));
-		[Field("kCLLocationAccuracyThreeKilometers", "__Internal")]
-		double kCLLocationAccuracyThreeKilometers { get; }
-
-		// extern const CLLocationDistance CLLocationDistanceMax __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(macos, introduced=10.14)));
-		[Mac(10, 14), iOS(6, 0)]
-		[Field("CLLocationDistanceMax", "__Internal")]
-		double CLLocationDistanceMax { get; }
-
-		// extern const NSTimeInterval CLTimeIntervalMax __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(macos, introduced=10.14)));
-		[Mac(10, 14), iOS(6, 0)]
-		[Field("CLTimeIntervalMax", "__Internal")]
-		double CLTimeIntervalMax { get; }
-
-		// extern const CLLocationCoordinate2D kCLLocationCoordinate2DInvalid __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(4, 0)]
-		[Field("kCLLocationCoordinate2DInvalid", "__Internal")]
-		CLLocationCoordinate2D kCLLocationCoordinate2DInvalid { get; }
-	}
-
-	// @interface CLFloor : NSObject <NSCopying, NSSecureCoding>
-	[Mac(10, 15), iOS(8, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLFloor : INSCopying, INSSecureCoding
-	{
-		// @property (readonly, nonatomic) NSInteger level;
-		[Export("level")]
-		nint Level { get; }
-	}
-
-	// @interface CLLocation : NSObject <NSCopying, NSSecureCoding>
-	[Mac(10, 6), iOS(2, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLLocation : INSCopying, INSSecureCoding
-	{
-		// -(instancetype _Nonnull)initWithLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
-		[Export("initWithLatitude:longitude:")]
-		IntPtr Constructor(double latitude, double longitude);
-
-		// -(instancetype _Nonnull)initWithCoordinate:(CLLocationCoordinate2D)coordinate altitude:(CLLocationDistance)altitude horizontalAccuracy:(CLLocationAccuracy)hAccuracy verticalAccuracy:(CLLocationAccuracy)vAccuracy timestamp:(NSDate * _Nonnull)timestamp;
-		[Export("initWithCoordinate:altitude:horizontalAccuracy:verticalAccuracy:timestamp:")]
-		IntPtr Constructor(CLLocationCoordinate2D coordinate, double altitude, double hAccuracy, double vAccuracy, NSDate timestamp);
-
-		// -(instancetype _Nonnull)initWithCoordinate:(CLLocationCoordinate2D)coordinate altitude:(CLLocationDistance)altitude horizontalAccuracy:(CLLocationAccuracy)hAccuracy verticalAccuracy:(CLLocationAccuracy)vAccuracy course:(CLLocationDirection)course speed:(CLLocationSpeed)speed timestamp:(NSDate * _Nonnull)timestamp __attribute__((availability(ios, introduced=4.2))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(4, 2)]
-		[Export("initWithCoordinate:altitude:horizontalAccuracy:verticalAccuracy:course:speed:timestamp:")]
-		IntPtr Constructor(CLLocationCoordinate2D coordinate, double altitude, double hAccuracy, double vAccuracy, double course, double speed, NSDate timestamp);
-
-		// @property (readonly, nonatomic) CLLocationCoordinate2D coordinate;
-		[Export("coordinate")]
-		CLLocationCoordinate2D Coordinate { get; }
-
-		// @property (readonly, nonatomic) CLLocationDistance altitude;
-		[Export("altitude")]
-		double Altitude { get; }
-
-		// @property (readonly, nonatomic) CLLocationAccuracy horizontalAccuracy;
-		[Export("horizontalAccuracy")]
-		double HorizontalAccuracy { get; }
-
-		// @property (readonly, nonatomic) CLLocationAccuracy verticalAccuracy;
-		[Export("verticalAccuracy")]
-		double VerticalAccuracy { get; }
-
-		// @property (readonly, nonatomic) CLLocationDirection course __attribute__((availability(ios, introduced=2.2))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(2, 2)]
-		[Export("course")]
-		double Course { get; }
-
-		// @property (readonly, nonatomic) CLLocationSpeed speed __attribute__((availability(ios, introduced=2.2))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(2, 2)]
-		[Export("speed")]
-		double Speed { get; }
-
-		// @property (readonly, copy, nonatomic) NSDate * _Nonnull timestamp;
-		[Export("timestamp", ArgumentSemantic.Copy)]
-		NSDate Timestamp { get; }
-
-		// @property (readonly, copy, nonatomic) CLFloor * _Nullable floor __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(macos, introduced=10.15)));
-		[Mac(10, 15), iOS(8, 0)]
-		[NullAllowed, Export("floor", ArgumentSemantic.Copy)]
-		CLFloor Floor { get; }
-
-		// -(CLLocationDistance)getDistanceFrom:(const CLLocation * _Nonnull)location __attribute__((availability(ios, introduced=2.0, deprecated=3.2))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 2, 0)]
-		[Deprecated(PlatformName.iOS, 3, 2)]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("getDistanceFrom:")]
-		double GetDistanceFrom(CLLocation location);
-
-		// -(CLLocationDistance)distanceFromLocation:(const CLLocation * _Nonnull)location __attribute__((availability(ios, introduced=3.2))) __attribute__((availability(macos, introduced=10.6)));
-		[Mac(10, 6), iOS(3, 2)]
-		[Export("distanceFromLocation:")]
-		double DistanceFromLocation(CLLocation location);
-	}
-
-	// @interface CLRegion : NSObject <NSCopying, NSSecureCoding>
-	[Mac(10, 7), iOS(4, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLRegion : INSCopying, INSSecureCoding
-	{
-		// -(instancetype _Nonnull)initCircularRegionWithCenter:(CLLocationCoordinate2D)center radius:(CLLocationDistance)radius identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.7, deprecated=10.10))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 4, 0, message: "Please see CLCircularRegion")]
-		[Deprecated(PlatformName.iOS, 7, 0, message: "Please see CLCircularRegion")]
-		[Introduced(PlatformName.MacOSX, 10, 7, message: "Please see CLCircularRegion")]
-		[Deprecated(PlatformName.MacOSX, 10, 10, message: "Please see CLCircularRegion")]
-		[NoTV]
-		[Export("initCircularRegionWithCenter:radius:identifier:")]
-		IntPtr Constructor(CLLocationCoordinate2D center, double radius, string identifier);
-
-		// @property (readonly, nonatomic) CLLocationCoordinate2D center __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.7, deprecated=10.10))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 4, 0, message: "Please see CLCircularRegion")]
-		[Deprecated(PlatformName.iOS, 7, 0, message: "Please see CLCircularRegion")]
-		[Introduced(PlatformName.MacOSX, 10, 7, message: "Please see CLCircularRegion")]
-		[Deprecated(PlatformName.MacOSX, 10, 10, message: "Please see CLCircularRegion")]
-		[NoTV]
-		[Export("center")]
-		CLLocationCoordinate2D Center { get; }
-
-		// @property (readonly, nonatomic) CLLocationDistance radius __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.7, deprecated=10.10))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 4, 0, message: "Please see CLCircularRegion")]
-		[Deprecated(PlatformName.iOS, 7, 0, message: "Please see CLCircularRegion")]
-		[Introduced(PlatformName.MacOSX, 10, 7, message: "Please see CLCircularRegion")]
-		[Deprecated(PlatformName.MacOSX, 10, 10, message: "Please see CLCircularRegion")]
-		[NoTV]
-		[Export("radius")]
-		double Radius { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull identifier __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(4, 0)]
-		[Export("identifier")]
-		string Identifier { get; }
-
-		// @property (assign, nonatomic) BOOL notifyOnEntry __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10)));
-		[Mac(10, 10), iOS(7, 0)]
-		[Export("notifyOnEntry")]
-		bool NotifyOnEntry { get; set; }
-
-		// @property (assign, nonatomic) BOOL notifyOnExit __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10)));
-		[Mac(10, 10), iOS(7, 0)]
-		[Export("notifyOnExit")]
-		bool NotifyOnExit { get; set; }
-
-		// -(BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.7, deprecated=10.10))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 4, 0, message: "Please see CLCircularRegion")]
-		[Deprecated(PlatformName.iOS, 7, 0, message: "Please see CLCircularRegion")]
-		[Introduced(PlatformName.MacOSX, 10, 7, message: "Please see CLCircularRegion")]
-		[Deprecated(PlatformName.MacOSX, 10, 10, message: "Please see CLCircularRegion")]
-		[NoTV]
-		[Export("containsCoordinate:")]
-		bool ContainsCoordinate(CLLocationCoordinate2D coordinate);
-	}
-
-	// @interface CLCircularRegion : CLRegion
-	[Mac(10, 10), iOS(7, 0)]
-	[BaseType(typeof(CLRegion))]
-	interface CLCircularRegion
-	{
-		// -(instancetype _Nonnull)initWithCenter:(CLLocationCoordinate2D)center radius:(CLLocationDistance)radius identifier:(NSString * _Nonnull)identifier;
-		[Export("initWithCenter:radius:identifier:")]
-		IntPtr Constructor(CLLocationCoordinate2D center, double radius, string identifier);
-
-		// @property (readonly, nonatomic) CLLocationCoordinate2D center;
-		[Export("center")]
-		CLLocationCoordinate2D Center { get; }
-
-		// @property (readonly, nonatomic) CLLocationDistance radius;
-		[Export("radius")]
-		double Radius { get; }
-
-		// -(BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate;
-		[Export("containsCoordinate:")]
-		bool ContainsCoordinate(CLLocationCoordinate2D coordinate);
-	}
-
-	// @interface CLBeaconIdentityConstraint : NSObject <NSCopying, NSSecureCoding>
-	[NoWatch, NoTV, NoMac, iOS(13, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLBeaconIdentityConstraint : INSCopying, INSSecureCoding
-	{
-		// @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID;
-		[Export("UUID", ArgumentSemantic.Copy)]
-		NSUuid UUID { get; }
-
-		// @property (readonly, copy, nonatomic) NSNumber * _Nullable major;
-		[NullAllowed, Export("major", ArgumentSemantic.Copy)]
-		NSNumber Major { get; }
-
-		// @property (readonly, copy, nonatomic) NSNumber * _Nullable minor;
-		[NullAllowed, Export("minor", ArgumentSemantic.Copy)]
-		NSNumber Minor { get; }
-
-		// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid;
-		[Export("initWithUUID:")]
-		IntPtr Constructor(NSUuid uuid);
-
-		// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid major:(CLBeaconMajorValue)major;
-		[Export("initWithUUID:major:")]
-		IntPtr Constructor(NSUuid uuid, ushort major);
-
-		// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor;
-		[Export("initWithUUID:major:minor:")]
-		IntPtr Constructor(NSUuid uuid, ushort major, ushort minor);
-	}
-
-	// @interface CLBeaconRegion : CLRegion
-	[NoWatch, NoTV, NoMac, iOS(7, 0)]
-	[BaseType(typeof(CLRegion))]
-	interface CLBeaconRegion
-	{
-		// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("initWithUUID:identifier:")]
-		IntPtr Constructor(NSUuid uuid, string identifier);
-
-		// -(instancetype _Nonnull)initWithProximityUUID:(NSUUID * _Nonnull)proximityUUID identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
-		[Introduced(PlatformName.iOS, 7, 0)]
-		[Deprecated(PlatformName.iOS, 13, 0)]
-		[Export("initWithProximityUUID:identifier:")]
-		IntPtr Constructor(NSUuid proximityUUID, string identifier);
-
-		// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid major:(CLBeaconMajorValue)major identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("initWithUUID:major:identifier:")]
-		IntPtr Constructor(NSUuid uuid, ushort major, string identifier);
-
-		// -(instancetype _Nonnull)initWithProximityUUID:(NSUUID * _Nonnull)proximityUUID major:(CLBeaconMajorValue)major identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
-		[Introduced(PlatformName.iOS, 7, 0)]
-		[Deprecated(PlatformName.iOS, 13, 0)]
-		[Export("initWithProximityUUID:major:identifier:")]
-		IntPtr Constructor(NSUuid proximityUUID, ushort major, string identifier);
-
-		// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("initWithUUID:major:minor:identifier:")]
-		IntPtr Constructor(NSUuid uuid, ushort major, ushort minor, string identifier);
-
-		// -(instancetype _Nonnull)initWithProximityUUID:(NSUUID * _Nonnull)proximityUUID major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
-		[Introduced(PlatformName.iOS, 7, 0)]
-		[Deprecated(PlatformName.iOS, 13, 0)]
-		[Export("initWithProximityUUID:major:minor:identifier:")]
-		IntPtr Constructor(NSUuid proximityUUID, ushort major, ushort minor, string identifier);
-
-		// -(instancetype _Nonnull)initWithBeaconIdentityConstraint:(CLBeaconIdentityConstraint * _Nonnull)beaconIdentityConstraint identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("initWithBeaconIdentityConstraint:identifier:")]
-		IntPtr Constructor(CLBeaconIdentityConstraint beaconIdentityConstraint, string identifier);
-
-		// -(NSMutableDictionary<NSString *,id> * _Nonnull)peripheralDataWithMeasuredPower:(NSNumber * _Nullable)measuredPower;
-		[Export("peripheralDataWithMeasuredPower:")]
-		NSMutableDictionary<NSString, NSObject> PeripheralDataWithMeasuredPower([NullAllowed] NSNumber measuredPower);
-
-		// @property (readonly, copy, nonatomic) CLBeaconIdentityConstraint * _Nonnull beaconIdentityConstraint __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("beaconIdentityConstraint", ArgumentSemantic.Copy)]
-		CLBeaconIdentityConstraint BeaconIdentityConstraint { get; }
-
-		// @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("UUID", ArgumentSemantic.Copy)]
-		NSUuid UUID { get; }
-
-		// @property (readonly, copy, nonatomic) NSUUID * _Nonnull proximityUUID __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
-		[Introduced(PlatformName.iOS, 7, 0)]
-		[Deprecated(PlatformName.iOS, 13, 0)]
-		[Export("proximityUUID", ArgumentSemantic.Copy)]
-		NSUuid ProximityUUID { get; }
-
-		// @property (readonly, copy, nonatomic) NSNumber * _Nullable major;
-		[NullAllowed, Export("major", ArgumentSemantic.Copy)]
-		NSNumber Major { get; }
-
-		// @property (readonly, copy, nonatomic) NSNumber * _Nullable minor;
-		[NullAllowed, Export("minor", ArgumentSemantic.Copy)]
-		NSNumber Minor { get; }
-
-		// @property (assign, nonatomic) BOOL notifyEntryStateOnDisplay;
-		[Export("notifyEntryStateOnDisplay")]
-		bool NotifyEntryStateOnDisplay { get; set; }
-	}
-
-	// @interface CLBeacon : NSObject <NSCopying, NSSecureCoding>
-	[NoWatch, NoTV, NoMac, iOS(7, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLBeacon : INSCopying, INSSecureCoding
-	{
-		// @property (readonly, copy, nonatomic) NSDate * _Nonnull timestamp __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("timestamp", ArgumentSemantic.Copy)]
-		NSDate Timestamp { get; }
-
-		// @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("UUID", ArgumentSemantic.Copy)]
-		NSUuid UUID { get; }
-
-		// @property (readonly, copy, nonatomic) NSUUID * _Nonnull proximityUUID __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
-		[Introduced(PlatformName.iOS, 7, 0)]
-		[Deprecated(PlatformName.iOS, 13, 0)]
-		[Export("proximityUUID", ArgumentSemantic.Copy)]
-		NSUuid ProximityUUID { get; }
-
-		// @property (readonly, copy, nonatomic) NSNumber * _Nonnull major;
-		[Export("major", ArgumentSemantic.Copy)]
-		NSNumber Major { get; }
-
-		// @property (readonly, copy, nonatomic) NSNumber * _Nonnull minor;
-		[Export("minor", ArgumentSemantic.Copy)]
-		NSNumber Minor { get; }
-
-		// @property (readonly, nonatomic) CLProximity proximity;
-		[Export("proximity")]
-		CLProximity Proximity { get; }
-
-		// @property (readonly, nonatomic) CLLocationAccuracy accuracy;
-		[Export("accuracy")]
-		double Accuracy { get; }
-
-		// @property (readonly, nonatomic) NSInteger rssi;
-		[Export("rssi")]
-		nint Rssi { get; }
-	}
-
-	[Static]
-	[Verify(ConstantsInterfaceAssociation)]
-	partial interface Constants
-	{
-		// extern const CLLocationDegrees kCLHeadingFilterNone __attribute__((visibility("default")));
-		[Field("kCLHeadingFilterNone", "__Internal")]
-		double kCLHeadingFilterNone { get; }
-	}
-
-	// @interface CLHeading : NSObject <NSCopying, NSSecureCoding>
-	[Watch(2, 0), NoTV, Mac(10, 7), iOS(3, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLHeading : INSCopying, INSSecureCoding
-	{
-		// @property (readonly, nonatomic) CLLocationDirection magneticHeading;
-		[Export("magneticHeading")]
-		double MagneticHeading { get; }
-
-		// @property (readonly, nonatomic) CLLocationDirection trueHeading;
-		[Export("trueHeading")]
-		double TrueHeading { get; }
-
-		// @property (readonly, nonatomic) CLLocationDirection headingAccuracy;
-		[Export("headingAccuracy")]
-		double HeadingAccuracy { get; }
-
-		// @property (readonly, nonatomic) CLHeadingComponentValue x;
-		[Export("x")]
-		double X { get; }
-
-		// @property (readonly, nonatomic) CLHeadingComponentValue y;
-		[Export("y")]
-		double Y { get; }
-
-		// @property (readonly, nonatomic) CLHeadingComponentValue z;
-		[Export("z")]
-		double Z { get; }
-
-		// @property (readonly, copy, nonatomic) NSDate * _Nonnull timestamp;
-		[Export("timestamp", ArgumentSemantic.Copy)]
-		NSDate Timestamp { get; }
-	}
-
-	// @interface CLLocationManager : NSObject
-	[Mac(10, 6), iOS(2, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLLocationManager
-	{
-		// +(BOOL)locationServicesEnabled __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(4, 0)]
-		[Static]
-		[Export("locationServicesEnabled")]
-		[Verify(MethodToProperty)]
-		bool LocationServicesEnabled { get; }
-
-		// +(BOOL)headingAvailable __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable)));
-		[Watch(2, 0), NoTV, Mac(10, 7), iOS(4, 0)]
-		[Static]
-		[Export("headingAvailable")]
-		[Verify(MethodToProperty)]
-		bool HeadingAvailable { get; }
-
-		// +(BOOL)significantLocationChangeMonitoringAvailable __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 7), iOS(4, 0)]
-		[Static]
-		[Export("significantLocationChangeMonitoringAvailable")]
-		[Verify(MethodToProperty)]
-		bool SignificantLocationChangeMonitoringAvailable { get; }
-
-		// +(BOOL)isMonitoringAvailableForClass:(Class _Nonnull)regionClass __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 10), iOS(7, 0)]
-		[Static]
-		[Export("isMonitoringAvailableForClass:")]
-		bool IsMonitoringAvailableForClass(Class regionClass);
-
-		// +(BOOL)regionMonitoringAvailable __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.8, deprecated=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 4, 0)]
-		[Deprecated(PlatformName.iOS, 7, 0)]
-		[Introduced(PlatformName.MacOSX, 10, 8)]
-		[Deprecated(PlatformName.MacOSX, 10, 10)]
-		[NoWatch, NoTV]
-		[Static]
-		[Export("regionMonitoringAvailable")]
-		[Verify(MethodToProperty)]
-		bool RegionMonitoringAvailable { get; }
-
-		// +(BOOL)regionMonitoringEnabled __attribute__((availability(ios, introduced=4.0, deprecated=6.0))) __attribute__((availability(macos, introduced=10.8, deprecated=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 4, 0, message: "Use +isMonitoringAvailableForClass: and +authorizationStatus instead")]
-		[Deprecated(PlatformName.iOS, 6, 0, message: "Use +isMonitoringAvailableForClass: and +authorizationStatus instead")]
-		[Introduced(PlatformName.MacOSX, 10, 8, message: "Use +isMonitoringAvailableForClass: and +authorizationStatus instead")]
-		[Deprecated(PlatformName.MacOSX, 10, 10, message: "Use +isMonitoringAvailableForClass: and +authorizationStatus instead")]
-		[NoWatch, NoTV]
-		[Static]
-		[Export("regionMonitoringEnabled")]
-		[Verify(MethodToProperty)]
-		bool RegionMonitoringEnabled { get; }
-
-		// +(BOOL)isRangingAvailable __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(7, 0)]
-		[Static]
-		[Export("isRangingAvailable")]
-		[Verify(MethodToProperty)]
-		bool IsRangingAvailable { get; }
-
-		// +(CLAuthorizationStatus)authorizationStatus __attribute__((availability(ios, introduced=4.2))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(4, 2)]
-		[Static]
-		[Export("authorizationStatus")]
-		[Verify(MethodToProperty)]
-		CLAuthorizationStatus AuthorizationStatus { get; }
-
-		[Wrap("WeakDelegate")]
-		[NullAllowed]
-		CLLocationManagerDelegate Delegate { get; set; }
-
-		// @property (nonatomic, weak) id<CLLocationManagerDelegate> _Nullable delegate;
-		[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
-		NSObject WeakDelegate { get; set; }
-
-		// @property (readonly, nonatomic) BOOL locationServicesEnabled __attribute__((availability(ios, introduced=2.0, deprecated=4.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 2, 0)]
-		[Deprecated(PlatformName.iOS, 4, 0)]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("locationServicesEnabled")]
-		bool LocationServicesEnabled { get; }
-
-		// @property (copy, nonatomic) NSString * _Nullable purpose __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(ios, introduced=3.2, deprecated=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 3, 2, message: "Set the purpose string in Info.plist using key NSLocationUsageDescription")]
-		[Deprecated(PlatformName.iOS, 6, 0, message: "Set the purpose string in Info.plist using key NSLocationUsageDescription")]
-		[NoWatch, NoTV, Mac(10, 7)]
-		[NullAllowed, Export("purpose")]
-		string Purpose { get; set; }
-
-		// @property (assign, nonatomic) CLActivityType activityType __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(4, 0), NoTV, NoMac, iOS(6, 0)]
-		[Export("activityType", ArgumentSemantic.Assign)]
-		CLActivityType ActivityType { get; set; }
-
-		// @property (assign, nonatomic) CLLocationDistance distanceFilter;
-		[Export("distanceFilter")]
-		double DistanceFilter { get; set; }
-
-		// @property (assign, nonatomic) CLLocationAccuracy desiredAccuracy;
-		[Export("desiredAccuracy")]
-		double DesiredAccuracy { get; set; }
-
-		// @property (assign, nonatomic) BOOL pausesLocationUpdatesAutomatically __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(6, 0)]
-		[Export("pausesLocationUpdatesAutomatically")]
-		bool PausesLocationUpdatesAutomatically { get; set; }
-
-		// @property (assign, nonatomic) BOOL allowsBackgroundLocationUpdates __attribute__((availability(ios, introduced=9.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(4, 0), NoTV, NoMac, iOS(9, 0)]
-		[Export("allowsBackgroundLocationUpdates")]
-		bool AllowsBackgroundLocationUpdates { get; set; }
-
-		// @property (assign, nonatomic) BOOL showsBackgroundLocationIndicator __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(11, 0)]
-		[Export("showsBackgroundLocationIndicator")]
-		bool ShowsBackgroundLocationIndicator { get; set; }
-
-		// @property (readonly, copy, nonatomic) CLLocation * _Nullable location;
-		[NullAllowed, Export("location", ArgumentSemantic.Copy)]
-		CLLocation Location { get; }
-
-		// @property (readonly, nonatomic) BOOL headingAvailable __attribute__((availability(ios, introduced=3.0, deprecated=4.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 3, 0)]
-		[Deprecated(PlatformName.iOS, 4, 0)]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("headingAvailable")]
-		bool HeadingAvailable { get; }
-
-		// @property (assign, nonatomic) CLLocationDegrees headingFilter __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
-		[Export("headingFilter")]
-		double HeadingFilter { get; set; }
-
-		// @property (assign, nonatomic) CLDeviceOrientation headingOrientation __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(2, 0), NoTV, NoMac, iOS(4, 0)]
-		[Export("headingOrientation", ArgumentSemantic.Assign)]
-		CLDeviceOrientation HeadingOrientation { get; set; }
-
-		// @property (readonly, copy, nonatomic) CLHeading * _Nullable heading __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(2, 0), NoTV, NoMac, iOS(4, 0)]
-		[NullAllowed, Export("heading", ArgumentSemantic.Copy)]
-		CLHeading Heading { get; }
-
-		// @property (readonly, nonatomic) CLLocationDistance maximumRegionMonitoringDistance __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
-		[Export("maximumRegionMonitoringDistance")]
-		double MaximumRegionMonitoringDistance { get; }
-
-		// @property (readonly, copy, nonatomic) NSSet<__kindof CLRegion *> * _Nonnull monitoredRegions __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
-		[Export("monitoredRegions", ArgumentSemantic.Copy)]
-		NSSet<CLRegion> MonitoredRegions { get; }
-
-		// @property (readonly, copy, nonatomic) NSSet<__kindof CLRegion *> * _Nonnull rangedRegions __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 7, 0, message: "Use -rangedBeaconConstraints")]
-		[Deprecated(PlatformName.iOS, 13, 0, message: "Use -rangedBeaconConstraints")]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("rangedRegions", ArgumentSemantic.Copy)]
-		NSSet<CLRegion> RangedRegions { get; }
-
-		// @property (readonly, copy, nonatomic) NSSet<CLBeaconIdentityConstraint *> * _Nonnull rangedBeaconConstraints __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("rangedBeaconConstraints", ArgumentSemantic.Copy)]
-		NSSet<CLBeaconIdentityConstraint> RangedBeaconConstraints { get; }
-
-		// -(void)requestWhenInUseAuthorization __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(macos, unavailable)));
-		[NoMac, iOS(8, 0)]
-		[Export("requestWhenInUseAuthorization")]
-		void RequestWhenInUseAuthorization();
-
-		// -(void)requestAlwaysAuthorization __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(tvos, unavailable)));
-		[NoTV, Mac(10, 15), iOS(8, 0)]
-		[Export("requestAlwaysAuthorization")]
-		void RequestAlwaysAuthorization();
-
-		// -(void)startUpdatingLocation __attribute__((availability(watchos, introduced=3.0))) __attribute__((availability(tvos, unavailable)));
-		[Watch(3, 0), NoTV]
-		[Export("startUpdatingLocation")]
-		void StartUpdatingLocation();
-
-		// -(void)stopUpdatingLocation;
-		[Export("stopUpdatingLocation")]
-		void StopUpdatingLocation();
-
-		// -(void)requestLocation __attribute__((availability(ios, introduced=9.0))) __attribute__((availability(macos, introduced=10.14)));
-		[Mac(10, 14), iOS(9, 0)]
-		[Export("requestLocation")]
-		void RequestLocation();
-
-		// -(void)startUpdatingHeading __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
-		[Export("startUpdatingHeading")]
-		void StartUpdatingHeading();
-
-		// -(void)stopUpdatingHeading __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
-		[Export("stopUpdatingHeading")]
-		void StopUpdatingHeading();
-
-		// -(void)dismissHeadingCalibrationDisplay __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
-		[Export("dismissHeadingCalibrationDisplay")]
-		void DismissHeadingCalibrationDisplay();
-
-		// -(void)startMonitoringSignificantLocationChanges __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 7), iOS(4, 0)]
-		[Export("startMonitoringSignificantLocationChanges")]
-		void StartMonitoringSignificantLocationChanges();
-
-		// -(void)stopMonitoringSignificantLocationChanges __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 7), iOS(4, 0)]
-		[Export("stopMonitoringSignificantLocationChanges")]
-		void StopMonitoringSignificantLocationChanges();
-
-		// -(void)startMonitoringForRegion:(CLRegion * _Nonnull)region desiredAccuracy:(CLLocationAccuracy)accuracy __attribute__((availability(ios, introduced=4.0, deprecated=6.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 4, 0)]
-		[Deprecated(PlatformName.iOS, 6, 0)]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("startMonitoringForRegion:desiredAccuracy:")]
-		void StartMonitoringForRegion(CLRegion region, double accuracy);
-
-		// -(void)stopMonitoringForRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
-		[Export("stopMonitoringForRegion:")]
-		void StopMonitoringForRegion(CLRegion region);
-
-		// -(void)startMonitoringForRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=5.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 8), iOS(5, 0)]
-		[Export("startMonitoringForRegion:")]
-		void StartMonitoringForRegion(CLRegion region);
-
-		// -(void)requestStateForRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 10), iOS(7, 0)]
-		[Export("requestStateForRegion:")]
-		void RequestStateForRegion(CLRegion region);
-
-		// -(void)startRangingBeaconsInRegion:(CLBeaconRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 7, 0, message: "Use -startRangingBeaconsSatisfyingConstraint:")]
-		[Deprecated(PlatformName.iOS, 13, 0, message: "Use -startRangingBeaconsSatisfyingConstraint:")]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("startRangingBeaconsInRegion:")]
-		void StartRangingBeaconsInRegion(CLBeaconRegion region);
-
-		// -(void)stopRangingBeaconsInRegion:(CLBeaconRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 7, 0, message: "Use -stopRangingBeaconsSatisfyingConstraint:")]
-		[Deprecated(PlatformName.iOS, 13, 0, message: "Use -stopRangingBeaconsSatisfyingConstraint:")]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("stopRangingBeaconsInRegion:")]
-		void StopRangingBeaconsInRegion(CLBeaconRegion region);
-
-		// -(void)startRangingBeaconsSatisfyingConstraint:(CLBeaconIdentityConstraint * _Nonnull)constraint __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("startRangingBeaconsSatisfyingConstraint:")]
-		void StartRangingBeaconsSatisfyingConstraint(CLBeaconIdentityConstraint constraint);
-
-		// -(void)stopRangingBeaconsSatisfyingConstraint:(CLBeaconIdentityConstraint * _Nonnull)constraint __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("stopRangingBeaconsSatisfyingConstraint:")]
-		void StopRangingBeaconsSatisfyingConstraint(CLBeaconIdentityConstraint constraint);
-
-		// -(void)allowDeferredLocationUpdatesUntilTraveled:(CLLocationDistance)distance timeout:(NSTimeInterval)timeout __attribute__((availability(ios, introduced=6.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 6, 0, message: "You can remove calls to this method")]
-		[Deprecated(PlatformName.iOS, 13, 0, message: "You can remove calls to this method")]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("allowDeferredLocationUpdatesUntilTraveled:timeout:")]
-		void AllowDeferredLocationUpdatesUntilTraveled(double distance, double timeout);
-
-		// -(void)disallowDeferredLocationUpdates __attribute__((availability(ios, introduced=6.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 6, 0, message: "You can remove calls to this method")]
-		[Deprecated(PlatformName.iOS, 13, 0, message: "You can remove calls to this method")]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("disallowDeferredLocationUpdates")]
-		void DisallowDeferredLocationUpdates();
-
-		// +(BOOL)deferredLocationUpdatesAvailable __attribute__((availability(ios, introduced=6.0, deprecated=13.0))) __attribute__((availability(macos, introduced=10.9, deprecated=10.15))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 6, 0, message: "You can remove calls to this method")]
-		[Deprecated(PlatformName.iOS, 13, 0, message: "You can remove calls to this method")]
-		[Introduced(PlatformName.MacOSX, 10, 9, message: "You can remove calls to this method")]
-		[Deprecated(PlatformName.MacOSX, 10, 15, message: "You can remove calls to this method")]
-		[NoWatch, NoTV]
-		[Static]
-		[Export("deferredLocationUpdatesAvailable")]
-		[Verify(MethodToProperty)]
-		bool DeferredLocationUpdatesAvailable { get; }
-	}
-
-	// @interface CLVisit : NSObject <NSSecureCoding, NSCopying>
-	[NoWatch, NoTV, NoMac, iOS(8, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLVisit : INSSecureCoding, INSCopying
-	{
-		// @property (readonly, copy, nonatomic) NSDate * _Nonnull arrivalDate;
-		[Export("arrivalDate", ArgumentSemantic.Copy)]
-		NSDate ArrivalDate { get; }
-
-		// @property (readonly, copy, nonatomic) NSDate * _Nonnull departureDate;
-		[Export("departureDate", ArgumentSemantic.Copy)]
-		NSDate DepartureDate { get; }
-
-		// @property (readonly, nonatomic) CLLocationCoordinate2D coordinate;
-		[Export("coordinate")]
-		CLLocationCoordinate2D Coordinate { get; }
-
-		// @property (readonly, nonatomic) CLLocationAccuracy horizontalAccuracy;
-		[Export("horizontalAccuracy")]
-		double HorizontalAccuracy { get; }
-	}
-
-	// @protocol CLLocationManagerDelegate <NSObject>
-	[Protocol, Model(AutoGeneratedName = true)]
-	[BaseType(typeof(NSObject))]
-	interface CLLocationManagerDelegate
-	{
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateToLocation:(CLLocation * _Nonnull)newLocation fromLocation:(CLLocation * _Nonnull)oldLocation __attribute__((availability(macos, introduced=10.6))) __attribute__((availability(ios, introduced=2.0, deprecated=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 2, 0, message: "Implement -locationManager:didUpdateLocations: instead")]
-		[Deprecated(PlatformName.iOS, 6, 0, message: "Implement -locationManager:didUpdateLocations: instead")]
-		[NoWatch, NoTV, Mac(10, 6)]
-		[Export("locationManager:didUpdateToLocation:fromLocation:")]
-		void LocationManager(CLLocationManager manager, CLLocation newLocation, CLLocation oldLocation);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(macos, introduced=10.9)));
-		[Mac(10, 9), iOS(6, 0)]
-		[Export("locationManager:didUpdateLocations:")]
-		void LocationManager(CLLocationManager manager, CLLocation[] locations);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateHeading:(CLHeading * _Nonnull)newHeading __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
-		[Export("locationManager:didUpdateHeading:")]
-		void LocationManager(CLLocationManager manager, CLHeading newHeading);
-
-		// @optional -(BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager * _Nonnull)manager __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
-		[Export("locationManagerShouldDisplayHeadingCalibration:")]
-		bool LocationManagerShouldDisplayHeadingCalibration(CLLocationManager manager);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 10), iOS(7, 0)]
-		[Export("locationManager:didDetermineState:forRegion:")]
-		void LocationManager(CLLocationManager manager, CLRegionState state, CLRegion region);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didRangeBeacons:(NSArray<CLBeacon *> * _Nonnull)beacons inRegion:(CLBeaconRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 7, 0)]
-		[Deprecated(PlatformName.iOS, 13, 0)]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("locationManager:didRangeBeacons:inRegion:")]
-		void LocationManager(CLLocationManager manager, CLBeacon[] beacons, CLBeaconRegion region);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion * _Nonnull)region withError:(NSError * _Nonnull)error __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[Introduced(PlatformName.iOS, 7, 0)]
-		[Deprecated(PlatformName.iOS, 13, 0)]
-		[Unavailable(PlatformName.MacCatalyst)]
-		[NoWatch, NoTV, NoMac]
-		[Advice("This API is not available when using UIKit on macOS.")]
-		[Export("locationManager:rangingBeaconsDidFailForRegion:withError:")]
-		void LocationManager(CLLocationManager manager, CLBeaconRegion region, NSError error);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didRangeBeacons:(NSArray<CLBeacon *> * _Nonnull)beacons satisfyingConstraint:(CLBeaconIdentityConstraint * _Nonnull)beaconConstraint __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("locationManager:didRangeBeacons:satisfyingConstraint:")]
-		void LocationManager(CLLocationManager manager, CLBeacon[] beacons, CLBeaconIdentityConstraint beaconConstraint);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didFailRangingBeaconsForConstraint:(CLBeaconIdentityConstraint * _Nonnull)beaconConstraint error:(NSError * _Nonnull)error __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(13, 0)]
-		[Export("locationManager:didFailRangingBeaconsForConstraint:error:")]
-		void LocationManager(CLLocationManager manager, CLBeaconIdentityConstraint beaconConstraint, NSError error);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didEnterRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
-		[Export("locationManager:didEnterRegion:")]
-		void LocationManager(CLLocationManager manager, CLRegion region);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didExitRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
-		[Export("locationManager:didExitRegion:")]
-		void LocationManager(CLLocationManager manager, CLRegion region);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nonnull)error;
-		[Export("locationManager:didFailWithError:")]
-		void LocationManager(CLLocationManager manager, NSError error);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager monitoringDidFailForRegion:(CLRegion * _Nullable)region withError:(NSError * _Nonnull)error __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
-		[Export("locationManager:monitoringDidFailForRegion:withError:")]
-		void LocationManager(CLLocationManager manager, [NullAllowed] CLRegion region, NSError error);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status __attribute__((availability(ios, introduced=4.2))) __attribute__((availability(macos, introduced=10.7)));
-		[Mac(10, 7), iOS(4, 2)]
-		[Export("locationManager:didChangeAuthorizationStatus:")]
-		void LocationManager(CLLocationManager manager, CLAuthorizationStatus status);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didStartMonitoringForRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=5.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 8), iOS(5, 0)]
-		[Export("locationManager:didStartMonitoringForRegion:")]
-		void LocationManager(CLLocationManager manager, CLRegion region);
-
-		// @optional -(void)locationManagerDidPauseLocationUpdates:(CLLocationManager * _Nonnull)manager __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(6, 0)]
-		[Export("locationManagerDidPauseLocationUpdates:")]
-		void LocationManagerDidPauseLocationUpdates(CLLocationManager manager);
-
-		// @optional -(void)locationManagerDidResumeLocationUpdates:(CLLocationManager * _Nonnull)manager __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(6, 0)]
-		[Export("locationManagerDidResumeLocationUpdates:")]
-		void LocationManagerDidResumeLocationUpdates(CLLocationManager manager);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didFinishDeferredUpdatesWithError:(NSError * _Nullable)error __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(macos, introduced=10.9))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
-		[NoWatch, NoTV, Mac(10, 9), iOS(6, 0)]
-		[Export("locationManager:didFinishDeferredUpdatesWithError:")]
-		void LocationManager(CLLocationManager manager, [NullAllowed] NSError error);
-
-		// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didVisit:(CLVisit * _Nonnull)visit __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(8, 0)]
-		[Export("locationManager:didVisit:")]
-		void LocationManager(CLLocationManager manager, CLVisit visit);
-	}
-
-	// @interface CLVisitExtensions (CLLocationManager)
-	[Category]
-	[BaseType(typeof(CLLocationManager))]
-	interface CLLocationManager_CLVisitExtensions
-	{
-		// -(void)startMonitoringVisits __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(8, 0)]
-		[Export("startMonitoringVisits")]
-		void StartMonitoringVisits();
-
-		// -(void)stopMonitoringVisits __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
-		[NoWatch, NoTV, NoMac, iOS(8, 0)]
-		[Export("stopMonitoringVisits")]
-		void StopMonitoringVisits();
-	}
-
-	// @interface CLPlacemark : NSObject <NSCopying, NSSecureCoding>
-	[Mac(10, 8), iOS(5, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLPlacemark : INSCopying, INSSecureCoding
-	{
-		// -(instancetype _Nonnull)initWithPlacemark:(CLPlacemark * _Nonnull)placemark;
-		[Export("initWithPlacemark:")]
-		IntPtr Constructor(CLPlacemark placemark);
-
-		// @property (readonly, copy, nonatomic) CLLocation * _Nullable location;
-		[NullAllowed, Export("location", ArgumentSemantic.Copy)]
-		CLLocation Location { get; }
-
-		// @property (readonly, copy, nonatomic) CLRegion * _Nullable region;
-		[NullAllowed, Export("region", ArgumentSemantic.Copy)]
-		CLRegion Region { get; }
-
-		// @property (readonly, copy, nonatomic) NSTimeZone * _Nullable timeZone __attribute__((availability(ios, introduced=9.0)));
-		[iOS(9, 0)]
-		[NullAllowed, Export("timeZone", ArgumentSemantic.Copy)]
-		NSTimeZone TimeZone { get; }
-
-		// @property (readonly, copy, nonatomic) NSDictionary * _Nullable addressDictionary __attribute__((availability(macos, introduced=10.8, deprecated=10.13))) __attribute__((availability(ios, introduced=5.0, deprecated=11.0))) __attribute__((availability(watchos, introduced=1.0, deprecated=4.0)));
-		[Introduced(PlatformName.MacOSX, 10, 8, message: "Use @properties")]
-		[Deprecated(PlatformName.MacOSX, 10, 13, message: "Use @properties")]
-		[Introduced(PlatformName.iOS, 5, 0, message: "Use @properties")]
-		[Deprecated(PlatformName.iOS, 11, 0, message: "Use @properties")]
-		[Introduced(PlatformName.WatchOS, 1, 0, message: "Use @properties")]
-		[Deprecated(PlatformName.WatchOS, 4, 0, message: "Use @properties")]
-		[NullAllowed, Export("addressDictionary", ArgumentSemantic.Copy)]
-		NSDictionary AddressDictionary { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable name;
-		[NullAllowed, Export("name")]
-		string Name { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable thoroughfare;
-		[NullAllowed, Export("thoroughfare")]
-		string Thoroughfare { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable subThoroughfare;
-		[NullAllowed, Export("subThoroughfare")]
-		string SubThoroughfare { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable locality;
-		[NullAllowed, Export("locality")]
-		string Locality { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable subLocality;
-		[NullAllowed, Export("subLocality")]
-		string SubLocality { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable administrativeArea;
-		[NullAllowed, Export("administrativeArea")]
-		string AdministrativeArea { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable subAdministrativeArea;
-		[NullAllowed, Export("subAdministrativeArea")]
-		string SubAdministrativeArea { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable postalCode;
-		[NullAllowed, Export("postalCode")]
-		string PostalCode { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable ISOcountryCode;
-		[NullAllowed, Export("ISOcountryCode")]
-		string ISOcountryCode { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable country;
-		[NullAllowed, Export("country")]
-		string Country { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable inlandWater;
-		[NullAllowed, Export("inlandWater")]
-		string InlandWater { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable ocean;
-		[NullAllowed, Export("ocean")]
-		string Ocean { get; }
-
-		// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable areasOfInterest;
-		[NullAllowed, Export("areasOfInterest", ArgumentSemantic.Copy)]
-		string[] AreasOfInterest { get; }
-	}
-
-	// @interface ContactsAdditions (CLPlacemark)
-	[Category]
-	[BaseType(typeof(CLPlacemark))]
-	interface CLPlacemark_ContactsAdditions
-	{
-		// @property (readonly, nonatomic) CNPostalAddress * _Nullable postalAddress __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable)));
-		[Watch(4, 0), NoTV, Mac(10, 13), iOS(11, 0)]
-		[NullAllowed, Export("postalAddress")]
-		CNPostalAddress PostalAddress { get; }
-	}
-
-	// typedef void (^CLGeocodeCompletionHandler)(NSArray<CLPlacemark *> * _Nullable, NSError * _Nullable);
-	delegate void CLGeocodeCompletionHandler([NullAllowed] CLPlacemark[] arg0, [NullAllowed] NSError arg1);
-
-	// @interface CLGeocoder : NSObject
-	[Mac(10, 8), iOS(5, 0)]
-	[BaseType(typeof(NSObject))]
-	interface CLGeocoder
-	{
-		// @property (readonly, getter = isGeocoding, nonatomic) BOOL geocoding;
-		[Export("geocoding")]
-		bool Geocoding { [Bind("isGeocoding")] get; }
-
-		// -(void)reverseGeocodeLocation:(CLLocation * _Nonnull)location completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler;
-		[Export("reverseGeocodeLocation:completionHandler:")]
-		void ReverseGeocodeLocation(CLLocation location, CLGeocodeCompletionHandler completionHandler);
-
-		// -(void)reverseGeocodeLocation:(CLLocation * _Nonnull)location preferredLocale:(NSLocale * _Nullable)locale completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, introduced=11.0)));
-		[Watch(4, 0), TV(11, 0), Mac(10, 13), iOS(11, 0)]
-		[Export("reverseGeocodeLocation:preferredLocale:completionHandler:")]
-		void ReverseGeocodeLocation(CLLocation location, [NullAllowed] NSLocale locale, CLGeocodeCompletionHandler completionHandler);
-
-		// -(void)geocodeAddressDictionary:(NSDictionary * _Nonnull)addressDictionary completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(macos, introduced=10.8, deprecated=10.13))) __attribute__((availability(ios, introduced=5.0, deprecated=11.0))) __attribute__((availability(watchos, introduced=1.0, deprecated=4.0)));
-		[Introduced(PlatformName.MacOSX, 10, 8, message: "Use -geocodePostalAddress:completionHandler:")]
-		[Deprecated(PlatformName.MacOSX, 10, 13, message: "Use -geocodePostalAddress:completionHandler:")]
-		[Introduced(PlatformName.iOS, 5, 0, message: "Use -geocodePostalAddress:completionHandler:")]
-		[Deprecated(PlatformName.iOS, 11, 0, message: "Use -geocodePostalAddress:completionHandler:")]
-		[Introduced(PlatformName.WatchOS, 1, 0, message: "Use -geocodePostalAddress:completionHandler:")]
-		[Deprecated(PlatformName.WatchOS, 4, 0, message: "Use -geocodePostalAddress:completionHandler:")]
-		[Export("geocodeAddressDictionary:completionHandler:")]
-		void GeocodeAddressDictionary(NSDictionary addressDictionary, CLGeocodeCompletionHandler completionHandler);
-
-		// -(void)geocodeAddressString:(NSString * _Nonnull)addressString completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler;
-		[Export("geocodeAddressString:completionHandler:")]
-		void GeocodeAddressString(string addressString, CLGeocodeCompletionHandler completionHandler);
-
-		// -(void)geocodeAddressString:(NSString * _Nonnull)addressString inRegion:(CLRegion * _Nullable)region completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler;
-		[Export("geocodeAddressString:inRegion:completionHandler:")]
-		void GeocodeAddressString(string addressString, [NullAllowed] CLRegion region, CLGeocodeCompletionHandler completionHandler);
-
-		// -(void)geocodeAddressString:(NSString * _Nonnull)addressString inRegion:(CLRegion * _Nullable)region preferredLocale:(NSLocale * _Nullable)locale completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, introduced=11.0)));
-		[Watch(4, 0), TV(11, 0), Mac(10, 13), iOS(11, 0)]
-		[Export("geocodeAddressString:inRegion:preferredLocale:completionHandler:")]
-		void GeocodeAddressString(string addressString, [NullAllowed] CLRegion region, [NullAllowed] NSLocale locale, CLGeocodeCompletionHandler completionHandler);
-
-		// -(void)cancelGeocode;
-		[Export("cancelGeocode")]
-		void CancelGeocode();
-	}
-
-	// @interface ContactsAdditions (CLGeocoder)
-	[Category]
-	[BaseType(typeof(CLGeocoder))]
-	interface CLGeocoder_ContactsAdditions
-	{
-		// -(void)geocodePostalAddress:(CNPostalAddress * _Nonnull)postalAddress completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable)));
-		[Watch(4, 0), NoTV, Mac(10, 13), iOS(11, 0)]
-		[Export("geocodePostalAddress:completionHandler:")]
-		void GeocodePostalAddress(CNPostalAddress postalAddress, CLGeocodeCompletionHandler completionHandler);
-
-		// -(void)geocodePostalAddress:(CNPostalAddress * _Nonnull)postalAddress preferredLocale:(NSLocale * _Nullable)locale completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable)));
-		[Watch(4, 0), NoTV, Mac(10, 13), iOS(11, 0)]
-		[Export("geocodePostalAddress:preferredLocale:completionHandler:")]
-		void GeocodePostalAddress(CNPostalAddress postalAddress, [NullAllowed] NSLocale locale, CLGeocodeCompletionHandler completionHandler);
-	}
-
-	// @interface VMEPosition : NSObject <NSCopying>
-	[BaseType(typeof(NSObject))]
-	interface VMEPosition : INSCopying
-	{
-		// -(instancetype)initWithLatitude:(double)latitude longitude:(double)longitude altitude:(double)altitude buildingID:(NSString *)buildingID floorID:(NSString *)floorID;
-		[Export("initWithLatitude:longitude:altitude:buildingID:floorID:")]
-		IntPtr Constructor(double latitude, double longitude, double altitude, string buildingID, string floorID);
-
-		// -(instancetype)initWithLatitude:(double)latitude longitude:(double)longitude altitude:(double)altitude;
-		[Export("initWithLatitude:longitude:altitude:")]
-		IntPtr Constructor(double latitude, double longitude, double altitude);
-
-		// -(BOOL)isEqualToPosition:(VMEPosition *)position;
-		[Export("isEqualToPosition:")]
-		bool IsEqualToPosition(VMEPosition position);
-
-		// @property (nonatomic) double latitude;
-		[Export("latitude")]
-		double Latitude { get; set; }
-
-		// @property (nonatomic) double longitude;
-		[Export("longitude")]
-		double Longitude { get; set; }
-
-		// @property (nonatomic) double altitude;
-		[Export("altitude")]
-		double Altitude { get; set; }
-
-		// @property (nonatomic, strong) NSString * buildingID;
-		[Export("buildingID", ArgumentSemantic.Strong)]
-		string BuildingID { get; set; }
-
-		// @property (nonatomic, strong) NSString * floorID;
-		[Export("floorID", ArgumentSemantic.Strong)]
-		string FloorID { get; set; }
-	}
-
-	// @interface VMERouteRequest : NSObject <NSCopying>
-	[BaseType(typeof(NSObject))]
-	interface VMERouteRequest : INSCopying
-	{
-		// -(instancetype)initWithAccessible:(BOOL)isAccessible optimize:(BOOL)isOptimized __attribute__((deprecated("Please use initWithRequestType:destinationsOrder:accessible:")));
-		[Export("initWithAccessible:optimize:")]
-		IntPtr Constructor(bool isAccessible, bool isOptimized);
-
-		// -(instancetype)initWithRequestType:(VMERouteRequestType)requestType destinationsOrder:(VMERouteDestinationsOrder)destinationsOrder;
-		[Export("initWithRequestType:destinationsOrder:")]
-		IntPtr Constructor(VMERouteRequestType requestType, VMERouteDestinationsOrder destinationsOrder);
-
-		// -(instancetype)initWithRequestType:(VMERouteRequestType)requestType destinationsOrder:(VMERouteDestinationsOrder)destinationsOrder accessible:(BOOL)isAccessible;
-		[Export("initWithRequestType:destinationsOrder:accessible:")]
-		IntPtr Constructor(VMERouteRequestType requestType, VMERouteDestinationsOrder destinationsOrder, bool isAccessible);
-
-		// -(id)getOrigin;
-		[Export("getOrigin")]
-		[Verify(MethodToProperty)]
-		NSObject Origin { get; }
-
-		// -(void)setOriginWithPlaceID:(NSString *)placeID __attribute__((deprecated("Please use setOrigin:")));
-		[Export("setOriginWithPlaceID:")]
-		void SetOriginWithPlaceID(string placeID);
-
-		// -(void)setOriginWithLocation:(CLLocation *)location __attribute__((deprecated("Please use setOrigin:")));
-		[Export("setOriginWithLocation:")]
-		void SetOriginWithLocation(CLLocation location);
-
-		// -(void)setOrigin:(id)origin;
-		[Export("setOrigin:")]
-		void SetOrigin(NSObject origin);
-
-		// -(NSArray *)getDestinations;
-		[Export("getDestinations")]
-		[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
-		NSObject[] Destinations { get; }
-
-		// -(BOOL)addDestination:(id)destination;
-		[Export("addDestination:")]
-		bool AddDestination(NSObject destination);
-
-		// -(BOOL)addDestinations:(NSArray *)destinations;
-		[Export("addDestinations:")]
-		[Verify(StronglyTypedNSArray)]
-		bool AddDestinations(NSObject[] destinations);
-
-		// -(void)removeAllDestinations;
-		[Export("removeAllDestinations")]
-		void RemoveAllDestinations();
-
-		// -(void)removeDestinationAtIndex:(NSUInteger)index;
-		[Export("removeDestinationAtIndex:")]
-		void RemoveDestinationAtIndex(nuint index);
-
-		// -(BOOL)replaceDestinationAtIndex:(NSUInteger)index withDestination:(id)destination;
-		[Export("replaceDestinationAtIndex:withDestination:")]
-		bool ReplaceDestinationAtIndex(nuint index, NSObject destination);
-
-		// -(BOOL)isEqualToRouteRequest:(VMERouteRequest *)routeRequest;
-		[Export("isEqualToRouteRequest:")]
-		bool IsEqualToRouteRequest(VMERouteRequest routeRequest);
-
-		// @property (nonatomic) BOOL isAccessible;
-		[Export("isAccessible")]
-		bool IsAccessible { get; set; }
-
-		// @property (readonly) BOOL isOptimal __attribute__((deprecated("Please use destinationsOrder")));
-		[Export("isOptimal")]
-		bool IsOptimal { get; }
-
-		// @property (nonatomic) VMERouteDestinationsOrder destinationsOrder;
-		[Export("destinationsOrder", ArgumentSemantic.Assign)]
-		VMERouteDestinationsOrder DestinationsOrder { get; set; }
-
-		// @property (nonatomic) VMERouteRequestType requestType;
-		[Export("requestType", ArgumentSemantic.Assign)]
-		VMERouteRequestType RequestType { get; set; }
-	}
-
-	// @interface VMERouteResult : NSObject <NSCopying>
-	[BaseType(typeof(NSObject))]
-	interface VMERouteResult : INSCopying
-	{
-		// -(instancetype)initWithDestinations:(NSArray *)destinations duration:(double)duration length:(double)length;
-		[Export("initWithDestinations:duration:length:")]
-		[Verify(StronglyTypedNSArray)]
-		IntPtr Constructor(NSObject[] destinations, double duration, double length);
-
-		// -(BOOL)isEqualToRouteResult:(VMERouteRequest *)routeRequest;
-		[Export("isEqualToRouteResult:")]
-		bool IsEqualToRouteResult(VMERouteRequest routeRequest);
-
-		// @property (readonly) double duration;
-		[Export("duration")]
-		double Duration { get; }
-
-		// @property (readonly) double length;
-		[Export("length")]
-		double Length { get; }
-
-		// @property (readonly) NSArray * destinations;
-		[Export("destinations")]
-		[Verify(StronglyTypedNSArray)]
-		NSObject[] Destinations { get; }
-	}
-
-	// @protocol VMEComputeRouteCallback <NSObject>
-	/*
-  Check whether adding [Model] to this declaration is appropriate.
-  [Model] is used to generate a C# class that implements this protocol,
-  and might be useful for protocols that consumers are supposed to implement,
-  since consumers can subclass the generated class instead of implementing
-  the generated interface. If consumers are not supposed to implement this
-  protocol, then [Model] is redundant and will generate code that will never
-  be used.
-*/
-	[Protocol]
-	[BaseType(typeof(NSObject))]
-	interface VMEComputeRouteCallback
-	{
-		// @optional -(void)computeRouteDidFinish:(VMEMapView *)mapView parameters:(VMERouteRequest *)routeRequest __attribute__((deprecated("Please use computeRouteDidFinish:parameters:result:")));
-		[Export("computeRouteDidFinish:parameters:")]
-		void ComputeRouteDidFinish(VMEMapView mapView, VMERouteRequest routeRequest);
-
-		// @required -(BOOL)computeRouteDidFinish:(VMEMapView *)mapView parameters:(VMERouteRequest *)routeRequest result:(VMERouteResult *)routeResult;
-		[Abstract]
-		[Export("computeRouteDidFinish:parameters:result:")]
-		bool ComputeRouteDidFinish(VMEMapView mapView, VMERouteRequest routeRequest, VMERouteResult routeResult);
-
-		// @required -(void)computeRouteDidFail:(VMEMapView *)mapView parameters:(VMERouteRequest *)routeRequest error:(NSString *)error;
-		[Abstract]
-		[Export("computeRouteDidFail:parameters:error:")]
-		void ComputeRouteDidFail(VMEMapView mapView, VMERouteRequest routeRequest, string error);
-	}
-
-	// @protocol VMEComputeRouteInterface <NSObject>
-	/*
-  Check whether adding [Model] to this declaration is appropriate.
-  [Model] is used to generate a C# class that implements this protocol,
-  and might be useful for protocols that consumers are supposed to implement,
-  since consumers can subclass the generated class instead of implementing
-  the generated interface. If consumers are not supposed to implement this
-  protocol, then [Model] is redundant and will generate code that will never
-  be used.
-*/
-	[Protocol]
-	[BaseType(typeof(NSObject))]
-	interface VMEComputeRouteInterface
-	{
-		// @required -(void)computeRoute:(VMERouteRequest *)routeRequest callback:(id<VMEComputeRouteCallback>)callback;
-		[Abstract]
-		[Export("computeRoute:callback:")]
-		void Callback(VMERouteRequest routeRequest, VMEComputeRouteCallback callback);
-	}
-
-	// @interface VMELocation : NSObject <NSCopying>
-	[BaseType(typeof(NSObject))]
-	interface VMELocation : INSCopying
-	{
-		// -(instancetype)initWithPosition:(VMEPosition *)position bearing:(double)bearing accuracy:(double)accuracy;
-		[Export("initWithPosition:bearing:accuracy:")]
-		IntPtr Constructor(VMEPosition position, double bearing, double accuracy);
-
-		// @property (nonatomic) VMEPosition * position;
-		[Export("position", ArgumentSemantic.Assign)]
-		VMEPosition Position { get; set; }
-
-		// @property (nonatomic) double accuracy;
-		[Export("accuracy")]
-		double Accuracy { get; set; }
-
-		// @property (nonatomic) double bearing;
-		[Export("bearing")]
-		double Bearing { get; set; }
-	}
-
-	// @protocol VMELocationInterface <NSObject>
-	/*
-  Check whether adding [Model] to this declaration is appropriate.
-  [Model] is used to generate a C# class that implements this protocol,
-  and might be useful for protocols that consumers are supposed to implement,
-  since consumers can subclass the generated class instead of implementing
-  the generated interface. If consumers are not supposed to implement this
-  protocol, then [Model] is redundant and will generate code that will never
-  be used.
-*/
-	[Protocol]
-	[BaseType(typeof(NSObject))]
-	interface VMELocationInterface
-	{
-		// @required -(void)updateLocation:(VMELocation *)update;
-		[Abstract]
-		[Export("updateLocation:")]
-		void UpdateLocation(VMELocation update);
-
-		// @required -(VMELocation *)createLocationFromLocation:(CLLocation *)location;
-		[Abstract]
-		[Export("createLocationFromLocation:")]
-		VMELocation CreateLocationFromLocation(CLLocation location);
-
-		// @required -(VMEPosition *)createPositionFromLocation:(CLLocation *)location;
-		[Abstract]
-		[Export("createPositionFromLocation:")]
-		VMEPosition CreatePositionFromLocation(CLLocation location);
-	}
-
-	// @interface VMECameraHeading : NSObject
-	[BaseType(typeof(NSObject))]
-	interface VMECameraHeading
-	{
-		// +(instancetype)cameraHeadingCurrent;
-		[Static]
-		[Export("cameraHeadingCurrent")]
-		VMECameraHeading CameraHeadingCurrent();
-
-		// +(instancetype)cameraHeadingForPlaceID:(NSString *)placeID;
-		[Static]
-		[Export("cameraHeadingForPlaceID:")]
-		VMECameraHeading CameraHeadingForPlaceID(string placeID);
-
-		// +(instancetype)cameraHeadingWithHeading:(float)heading;
-		[Static]
-		[Export("cameraHeadingWithHeading:")]
-		VMECameraHeading CameraHeadingWithHeading(float heading);
-	}
-
-	// @interface VMECameraUpdate : NSObject
-	[BaseType(typeof(NSObject))]
-	interface VMECameraUpdate
-	{
-		// -(instancetype)initWithViewMode:(id)viewMode buildingID:(NSString *)buildingID floorID:(NSString *)floorID __attribute__((deprecated("Please use either: cameraUpdateForViewMode:heading:, cameraUpdateForViewMode:heading:buildingID: or cameraUpdateForViewMode:heading:floorID:")));
-		[Export("initWithViewMode:buildingID:floorID:")]
-		IntPtr Constructor(NSObject viewMode, string buildingID, string floorID);
-
-		// -(instancetype)initWithPlaceID:(NSString *)placeID __attribute__((deprecated("Please use cameraUpdateForPlaceID:")));
-		[Export("initWithPlaceID:")]
-		IntPtr Constructor(string placeID);
-
-		// -(instancetype)initWithPositions:(NSArray *)positions marginTop:(NSUInteger)marginTop marginBottom:(NSUInteger)marginBottom marginLeft:(NSUInteger)marginLeft marginRight:(NSUInteger)marginRight heading:(NSNumber *)heading __attribute__((deprecated("Please use cameraUpdateForPositions:heading:paddingTop:paddingBottom:paddingLeft:paddingRight")));
-		[Export("initWithPositions:marginTop:marginBottom:marginLeft:marginRight:heading:")]
-		[Verify(StronglyTypedNSArray)]
-		IntPtr Constructor(NSObject[] positions, nuint marginTop, nuint marginBottom, nuint marginLeft, nuint marginRight, NSNumber heading);
-
-		// +(instancetype)cameraUpdateReset;
-		[Static]
-		[Export("cameraUpdateReset")]
-		VMECameraUpdate CameraUpdateReset();
-
-		// +(instancetype)cameraUpdateResetWithHeading:(VMECameraHeading *)heading;
-		[Static]
-		[Export("cameraUpdateResetWithHeading:")]
-		VMECameraUpdate CameraUpdateResetWithHeading(VMECameraHeading heading);
-
-		// +(instancetype)cameraUpdateForViewMode:(id)viewMode heading:(VMECameraHeading *)heading;
-		[Static]
-		[Export("cameraUpdateForViewMode:heading:")]
-		VMECameraUpdate CameraUpdateForViewMode(NSObject viewMode, VMECameraHeading heading);
-
-		// +(instancetype)cameraUpdateForViewMode:(id)viewMode heading:(VMECameraHeading *)heading buildingID:(NSString *)buildingID;
-		[Static]
-		[Export("cameraUpdateForViewMode:heading:buildingID:")]
-		VMECameraUpdate CameraUpdateForViewMode(NSObject viewMode, VMECameraHeading heading, string buildingID);
-
-		// +(instancetype)cameraUpdateForViewMode:(id)viewMode heading:(VMECameraHeading *)heading floorID:(NSString *)floorID;
-		[Static]
-		[Export("cameraUpdateForViewMode:heading:floorID:")]
-		VMECameraUpdate CameraUpdateForViewMode(NSObject viewMode, VMECameraHeading heading, string floorID);
-
-		// +(instancetype)cameraUpdateForPlaceID:(NSString *)placeID;
-		[Static]
-		[Export("cameraUpdateForPlaceID:")]
-		VMECameraUpdate CameraUpdateForPlaceID(string placeID);
-
-		// +(instancetype)cameraUpdateForPlaceID:(NSString *)placeID heading:(VMECameraHeading *)heading paddingTop:(id)top paddingBottom:(id)bottom paddingLeft:(id)left paddingRight:(id)right;
-		[Static]
-		[Export("cameraUpdateForPlaceID:heading:paddingTop:paddingBottom:paddingLeft:paddingRight:")]
-		VMECameraUpdate CameraUpdateForPlaceID(string placeID, VMECameraHeading heading, NSObject top, NSObject bottom, NSObject left, NSObject right);
-
-		// +(instancetype)cameraUpdateForPositions:(NSArray *)positions heading:(VMECameraHeading *)heading paddingTop:(id)top paddingBottom:(id)bottom paddingLeft:(id)left paddingRight:(id)right;
-		[Static]
-		[Export("cameraUpdateForPositions:heading:paddingTop:paddingBottom:paddingLeft:paddingRight:")]
-		[Verify(StronglyTypedNSArray)]
-		VMECameraUpdate CameraUpdateForPositions(NSObject[] positions, VMECameraHeading heading, NSObject top, NSObject bottom, NSObject left, NSObject right);
-
-		// +(instancetype)cameraUpdateForPosition:(VMEPosition *)position heading:(VMECameraHeading *)heading minAltitude:(double)minAltitude maxAltitude:(double)maxAltitude;
-		[Static]
-		[Export("cameraUpdateForPosition:heading:minAltitude:maxAltitude:")]
-		VMECameraUpdate CameraUpdateForPosition(VMEPosition position, VMECameraHeading heading, double minAltitude, double maxAltitude);
-	}
-
-	// @interface VMESceneUpdate : NSObject
-	[BaseType(typeof(NSObject))]
-	interface VMESceneUpdate
-	{
-		// +(instancetype)sceneUpdateForViewMode:(id)viewMode;
-		[Static]
-		[Export("sceneUpdateForViewMode:")]
-		VMESceneUpdate SceneUpdateForViewMode(NSObject viewMode);
-
-		// +(instancetype)sceneUpdateForViewMode:(id)viewMode buildingID:(NSString *)buildingID;
-		[Static]
-		[Export("sceneUpdateForViewMode:buildingID:")]
-		VMESceneUpdate SceneUpdateForViewMode(NSObject viewMode, string buildingID);
-
-		// +(instancetype)sceneUpdateForViewMode:(id)viewMode floorID:(NSString *)floorID;
-		[Static]
-		[Export("sceneUpdateForViewMode:floorID:")]
-		VMESceneUpdate SceneUpdateForViewMode(NSObject viewMode, string floorID);
-	}
-
-	// @protocol VMEMapInterface <NSObject>
-	/*
-  Check whether adding [Model] to this declaration is appropriate.
-  [Model] is used to generate a C# class that implements this protocol,
-  and might be useful for protocols that consumers are supposed to implement,
-  since consumers can subclass the generated class instead of implementing
-  the generated interface. If consumers are not supposed to implement this
-  protocol, then [Model] is redundant and will generate code that will never
-  be used.
-*/
-	[Protocol]
-	[BaseType(typeof(NSObject))]
-	interface VMEMapInterface
-	{
-		// @required -(void)moveCamera:(VMECameraUpdate *)update animated:(BOOL)animated __attribute__((deprecated("Please use either animateCamera: or updateCamera:")));
-		[Abstract]
-		[Export("moveCamera:animated:")]
-		void MoveCamera(VMECameraUpdate update, bool animated);
-
-		// @required -(void)updateCamera:(VMECameraUpdate *)update;
-		[Abstract]
-		[Export("updateCamera:")]
-		void UpdateCamera(VMECameraUpdate update);
-
-		// @required -(void)animateCamera:(VMECameraUpdate *)update;
-		[Abstract]
-		[Export("animateCamera:")]
-		void AnimateCamera(VMECameraUpdate update);
-
-		// @required -(void)updateScene:(VMESceneUpdate *)update;
-		[Abstract]
-		[Export("updateScene:")]
-		void UpdateScene(VMESceneUpdate update);
-
-		// @required -(void)animateScene:(VMESceneUpdate *)update;
-		[Abstract]
-		[Export("animateScene:")]
-		void AnimateScene(VMESceneUpdate update);
 	}
 
 	// @interface UIAcceleration : NSObject
@@ -68062,6 +66589,1422 @@ interface UIDocumentInteractionControllerDelegate
 	bool DocumentInteractionController(UIDocumentInteractionController controller, [NullAllowed] Selector action);
 }
 
+[Static]
+[Verify(ConstantsInterfaceAssociation)]
+partial interface Constants
+{
+	// extern NSString *const _Nonnull kCLErrorDomain __attribute__((visibility("default")));
+	[Field("kCLErrorDomain", "__Internal")]
+	NSString kCLErrorDomain { get; }
+}
+
+[Static]
+[Verify(ConstantsInterfaceAssociation)]
+partial interface Constants
+{
+	// extern NSString *const _Nonnull kCLErrorUserInfoAlternateRegionKey __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=5.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, iOS(5, 0)]
+	[Field("kCLErrorUserInfoAlternateRegionKey", "__Internal")]
+	NSString kCLErrorUserInfoAlternateRegionKey { get; }
+}
+
+[Static]
+[Verify(ConstantsInterfaceAssociation)]
+partial interface Constants
+{
+	// extern const CLLocationDistance kCLDistanceFilterNone __attribute__((visibility("default")));
+	[Field("kCLDistanceFilterNone", "__Internal")]
+	double kCLDistanceFilterNone { get; }
+
+	// extern const CLLocationAccuracy kCLLocationAccuracyBestForNavigation __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(4, 0)]
+	[Field("kCLLocationAccuracyBestForNavigation", "__Internal")]
+	double kCLLocationAccuracyBestForNavigation { get; }
+
+	// extern const CLLocationAccuracy kCLLocationAccuracyBest __attribute__((visibility("default")));
+	[Field("kCLLocationAccuracyBest", "__Internal")]
+	double kCLLocationAccuracyBest { get; }
+
+	// extern const CLLocationAccuracy kCLLocationAccuracyNearestTenMeters __attribute__((visibility("default")));
+	[Field("kCLLocationAccuracyNearestTenMeters", "__Internal")]
+	double kCLLocationAccuracyNearestTenMeters { get; }
+
+	// extern const CLLocationAccuracy kCLLocationAccuracyHundredMeters __attribute__((visibility("default")));
+	[Field("kCLLocationAccuracyHundredMeters", "__Internal")]
+	double kCLLocationAccuracyHundredMeters { get; }
+
+	// extern const CLLocationAccuracy kCLLocationAccuracyKilometer __attribute__((visibility("default")));
+	[Field("kCLLocationAccuracyKilometer", "__Internal")]
+	double kCLLocationAccuracyKilometer { get; }
+
+	// extern const CLLocationAccuracy kCLLocationAccuracyThreeKilometers __attribute__((visibility("default")));
+	[Field("kCLLocationAccuracyThreeKilometers", "__Internal")]
+	double kCLLocationAccuracyThreeKilometers { get; }
+
+	// extern const CLLocationDistance CLLocationDistanceMax __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(macos, introduced=10.14)));
+	[Mac(10, 14), iOS(6, 0)]
+	[Field("CLLocationDistanceMax", "__Internal")]
+	double CLLocationDistanceMax { get; }
+
+	// extern const NSTimeInterval CLTimeIntervalMax __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(macos, introduced=10.14)));
+	[Mac(10, 14), iOS(6, 0)]
+	[Field("CLTimeIntervalMax", "__Internal")]
+	double CLTimeIntervalMax { get; }
+
+	// extern const CLLocationCoordinate2D kCLLocationCoordinate2DInvalid __attribute__((visibility("default"))) __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(4, 0)]
+	[Field("kCLLocationCoordinate2DInvalid", "__Internal")]
+	CLLocationCoordinate2D kCLLocationCoordinate2DInvalid { get; }
+}
+
+// @interface CLFloor : NSObject <NSCopying, NSSecureCoding>
+[Mac(10, 15), iOS(8, 0)]
+[BaseType(typeof(NSObject))]
+interface CLFloor : INSCopying, INSSecureCoding
+{
+	// @property (readonly, nonatomic) NSInteger level;
+	[Export("level")]
+	nint Level { get; }
+}
+
+// @interface CLLocation : NSObject <NSCopying, NSSecureCoding>
+[Mac(10, 6), iOS(2, 0)]
+[BaseType(typeof(NSObject))]
+interface CLLocation : INSCopying, INSSecureCoding
+{
+	// -(instancetype _Nonnull)initWithLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
+	[Export("initWithLatitude:longitude:")]
+	IntPtr Constructor(double latitude, double longitude);
+
+	// -(instancetype _Nonnull)initWithCoordinate:(CLLocationCoordinate2D)coordinate altitude:(CLLocationDistance)altitude horizontalAccuracy:(CLLocationAccuracy)hAccuracy verticalAccuracy:(CLLocationAccuracy)vAccuracy timestamp:(NSDate * _Nonnull)timestamp;
+	[Export("initWithCoordinate:altitude:horizontalAccuracy:verticalAccuracy:timestamp:")]
+	IntPtr Constructor(CLLocationCoordinate2D coordinate, double altitude, double hAccuracy, double vAccuracy, NSDate timestamp);
+
+	// -(instancetype _Nonnull)initWithCoordinate:(CLLocationCoordinate2D)coordinate altitude:(CLLocationDistance)altitude horizontalAccuracy:(CLLocationAccuracy)hAccuracy verticalAccuracy:(CLLocationAccuracy)vAccuracy course:(CLLocationDirection)course speed:(CLLocationSpeed)speed timestamp:(NSDate * _Nonnull)timestamp __attribute__((availability(ios, introduced=4.2))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(4, 2)]
+	[Export("initWithCoordinate:altitude:horizontalAccuracy:verticalAccuracy:course:speed:timestamp:")]
+	IntPtr Constructor(CLLocationCoordinate2D coordinate, double altitude, double hAccuracy, double vAccuracy, double course, double speed, NSDate timestamp);
+
+	// @property (readonly, nonatomic) CLLocationCoordinate2D coordinate;
+	[Export("coordinate")]
+	CLLocationCoordinate2D Coordinate { get; }
+
+	// @property (readonly, nonatomic) CLLocationDistance altitude;
+	[Export("altitude")]
+	double Altitude { get; }
+
+	// @property (readonly, nonatomic) CLLocationAccuracy horizontalAccuracy;
+	[Export("horizontalAccuracy")]
+	double HorizontalAccuracy { get; }
+
+	// @property (readonly, nonatomic) CLLocationAccuracy verticalAccuracy;
+	[Export("verticalAccuracy")]
+	double VerticalAccuracy { get; }
+
+	// @property (readonly, nonatomic) CLLocationDirection course __attribute__((availability(ios, introduced=2.2))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(2, 2)]
+	[Export("course")]
+	double Course { get; }
+
+	// @property (readonly, nonatomic) CLLocationSpeed speed __attribute__((availability(ios, introduced=2.2))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(2, 2)]
+	[Export("speed")]
+	double Speed { get; }
+
+	// @property (readonly, copy, nonatomic) NSDate * _Nonnull timestamp;
+	[Export("timestamp", ArgumentSemantic.Copy)]
+	NSDate Timestamp { get; }
+
+	// @property (readonly, copy, nonatomic) CLFloor * _Nullable floor __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(macos, introduced=10.15)));
+	[Mac(10, 15), iOS(8, 0)]
+	[NullAllowed, Export("floor", ArgumentSemantic.Copy)]
+	CLFloor Floor { get; }
+
+	// -(CLLocationDistance)getDistanceFrom:(const CLLocation * _Nonnull)location __attribute__((availability(ios, introduced=2.0, deprecated=3.2))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 2, 0)]
+	[Deprecated(PlatformName.iOS, 3, 2)]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("getDistanceFrom:")]
+	double GetDistanceFrom(CLLocation location);
+
+	// -(CLLocationDistance)distanceFromLocation:(const CLLocation * _Nonnull)location __attribute__((availability(ios, introduced=3.2))) __attribute__((availability(macos, introduced=10.6)));
+	[Mac(10, 6), iOS(3, 2)]
+	[Export("distanceFromLocation:")]
+	double DistanceFromLocation(CLLocation location);
+}
+
+// @interface CLRegion : NSObject <NSCopying, NSSecureCoding>
+[Mac(10, 7), iOS(4, 0)]
+[BaseType(typeof(NSObject))]
+interface CLRegion : INSCopying, INSSecureCoding
+{
+	// -(instancetype _Nonnull)initCircularRegionWithCenter:(CLLocationCoordinate2D)center radius:(CLLocationDistance)radius identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.7, deprecated=10.10))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 4, 0, message: "Please see CLCircularRegion")]
+	[Deprecated(PlatformName.iOS, 7, 0, message: "Please see CLCircularRegion")]
+	[Introduced(PlatformName.MacOSX, 10, 7, message: "Please see CLCircularRegion")]
+	[Deprecated(PlatformName.MacOSX, 10, 10, message: "Please see CLCircularRegion")]
+	[NoTV]
+	[Export("initCircularRegionWithCenter:radius:identifier:")]
+	IntPtr Constructor(CLLocationCoordinate2D center, double radius, string identifier);
+
+	// @property (readonly, nonatomic) CLLocationCoordinate2D center __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.7, deprecated=10.10))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 4, 0, message: "Please see CLCircularRegion")]
+	[Deprecated(PlatformName.iOS, 7, 0, message: "Please see CLCircularRegion")]
+	[Introduced(PlatformName.MacOSX, 10, 7, message: "Please see CLCircularRegion")]
+	[Deprecated(PlatformName.MacOSX, 10, 10, message: "Please see CLCircularRegion")]
+	[NoTV]
+	[Export("center")]
+	CLLocationCoordinate2D Center { get; }
+
+	// @property (readonly, nonatomic) CLLocationDistance radius __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.7, deprecated=10.10))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 4, 0, message: "Please see CLCircularRegion")]
+	[Deprecated(PlatformName.iOS, 7, 0, message: "Please see CLCircularRegion")]
+	[Introduced(PlatformName.MacOSX, 10, 7, message: "Please see CLCircularRegion")]
+	[Deprecated(PlatformName.MacOSX, 10, 10, message: "Please see CLCircularRegion")]
+	[NoTV]
+	[Export("radius")]
+	double Radius { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nonnull identifier __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(4, 0)]
+	[Export("identifier")]
+	string Identifier { get; }
+
+	// @property (assign, nonatomic) BOOL notifyOnEntry __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10)));
+	[Mac(10, 10), iOS(7, 0)]
+	[Export("notifyOnEntry")]
+	bool NotifyOnEntry { get; set; }
+
+	// @property (assign, nonatomic) BOOL notifyOnExit __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10)));
+	[Mac(10, 10), iOS(7, 0)]
+	[Export("notifyOnExit")]
+	bool NotifyOnExit { get; set; }
+
+	// -(BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.7, deprecated=10.10))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 4, 0, message: "Please see CLCircularRegion")]
+	[Deprecated(PlatformName.iOS, 7, 0, message: "Please see CLCircularRegion")]
+	[Introduced(PlatformName.MacOSX, 10, 7, message: "Please see CLCircularRegion")]
+	[Deprecated(PlatformName.MacOSX, 10, 10, message: "Please see CLCircularRegion")]
+	[NoTV]
+	[Export("containsCoordinate:")]
+	bool ContainsCoordinate(CLLocationCoordinate2D coordinate);
+}
+
+// @interface CLCircularRegion : CLRegion
+[Mac(10, 10), iOS(7, 0)]
+[BaseType(typeof(CLRegion))]
+interface CLCircularRegion
+{
+	// -(instancetype _Nonnull)initWithCenter:(CLLocationCoordinate2D)center radius:(CLLocationDistance)radius identifier:(NSString * _Nonnull)identifier;
+	[Export("initWithCenter:radius:identifier:")]
+	IntPtr Constructor(CLLocationCoordinate2D center, double radius, string identifier);
+
+	// @property (readonly, nonatomic) CLLocationCoordinate2D center;
+	[Export("center")]
+	CLLocationCoordinate2D Center { get; }
+
+	// @property (readonly, nonatomic) CLLocationDistance radius;
+	[Export("radius")]
+	double Radius { get; }
+
+	// -(BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate;
+	[Export("containsCoordinate:")]
+	bool ContainsCoordinate(CLLocationCoordinate2D coordinate);
+}
+
+// @interface CLBeaconIdentityConstraint : NSObject <NSCopying, NSSecureCoding>
+[NoWatch, NoTV, NoMac, iOS(13, 0)]
+[BaseType(typeof(NSObject))]
+interface CLBeaconIdentityConstraint : INSCopying, INSSecureCoding
+{
+	// @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID;
+	[Export("UUID", ArgumentSemantic.Copy)]
+	NSUuid UUID { get; }
+
+	// @property (readonly, copy, nonatomic) NSNumber * _Nullable major;
+	[NullAllowed, Export("major", ArgumentSemantic.Copy)]
+	NSNumber Major { get; }
+
+	// @property (readonly, copy, nonatomic) NSNumber * _Nullable minor;
+	[NullAllowed, Export("minor", ArgumentSemantic.Copy)]
+	NSNumber Minor { get; }
+
+	// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid;
+	[Export("initWithUUID:")]
+	IntPtr Constructor(NSUuid uuid);
+
+	// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid major:(CLBeaconMajorValue)major;
+	[Export("initWithUUID:major:")]
+	IntPtr Constructor(NSUuid uuid, ushort major);
+
+	// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor;
+	[Export("initWithUUID:major:minor:")]
+	IntPtr Constructor(NSUuid uuid, ushort major, ushort minor);
+}
+
+// @interface CLBeaconRegion : CLRegion
+[NoWatch, NoTV, NoMac, iOS(7, 0)]
+[BaseType(typeof(CLRegion))]
+interface CLBeaconRegion
+{
+	// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("initWithUUID:identifier:")]
+	IntPtr Constructor(NSUuid uuid, string identifier);
+
+	// -(instancetype _Nonnull)initWithProximityUUID:(NSUUID * _Nonnull)proximityUUID identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
+	[Introduced(PlatformName.iOS, 7, 0)]
+	[Deprecated(PlatformName.iOS, 13, 0)]
+	[Export("initWithProximityUUID:identifier:")]
+	IntPtr Constructor(NSUuid proximityUUID, string identifier);
+
+	// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid major:(CLBeaconMajorValue)major identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("initWithUUID:major:identifier:")]
+	IntPtr Constructor(NSUuid uuid, ushort major, string identifier);
+
+	// -(instancetype _Nonnull)initWithProximityUUID:(NSUUID * _Nonnull)proximityUUID major:(CLBeaconMajorValue)major identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
+	[Introduced(PlatformName.iOS, 7, 0)]
+	[Deprecated(PlatformName.iOS, 13, 0)]
+	[Export("initWithProximityUUID:major:identifier:")]
+	IntPtr Constructor(NSUuid proximityUUID, ushort major, string identifier);
+
+	// -(instancetype _Nonnull)initWithUUID:(NSUUID * _Nonnull)uuid major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("initWithUUID:major:minor:identifier:")]
+	IntPtr Constructor(NSUuid uuid, ushort major, ushort minor, string identifier);
+
+	// -(instancetype _Nonnull)initWithProximityUUID:(NSUUID * _Nonnull)proximityUUID major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
+	[Introduced(PlatformName.iOS, 7, 0)]
+	[Deprecated(PlatformName.iOS, 13, 0)]
+	[Export("initWithProximityUUID:major:minor:identifier:")]
+	IntPtr Constructor(NSUuid proximityUUID, ushort major, ushort minor, string identifier);
+
+	// -(instancetype _Nonnull)initWithBeaconIdentityConstraint:(CLBeaconIdentityConstraint * _Nonnull)beaconIdentityConstraint identifier:(NSString * _Nonnull)identifier __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("initWithBeaconIdentityConstraint:identifier:")]
+	IntPtr Constructor(CLBeaconIdentityConstraint beaconIdentityConstraint, string identifier);
+
+	// -(NSMutableDictionary<NSString *,id> * _Nonnull)peripheralDataWithMeasuredPower:(NSNumber * _Nullable)measuredPower;
+	[Export("peripheralDataWithMeasuredPower:")]
+	NSMutableDictionary<NSString, NSObject> PeripheralDataWithMeasuredPower([NullAllowed] NSNumber measuredPower);
+
+	// @property (readonly, copy, nonatomic) CLBeaconIdentityConstraint * _Nonnull beaconIdentityConstraint __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("beaconIdentityConstraint", ArgumentSemantic.Copy)]
+	CLBeaconIdentityConstraint BeaconIdentityConstraint { get; }
+
+	// @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("UUID", ArgumentSemantic.Copy)]
+	NSUuid UUID { get; }
+
+	// @property (readonly, copy, nonatomic) NSUUID * _Nonnull proximityUUID __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
+	[Introduced(PlatformName.iOS, 7, 0)]
+	[Deprecated(PlatformName.iOS, 13, 0)]
+	[Export("proximityUUID", ArgumentSemantic.Copy)]
+	NSUuid ProximityUUID { get; }
+
+	// @property (readonly, copy, nonatomic) NSNumber * _Nullable major;
+	[NullAllowed, Export("major", ArgumentSemantic.Copy)]
+	NSNumber Major { get; }
+
+	// @property (readonly, copy, nonatomic) NSNumber * _Nullable minor;
+	[NullAllowed, Export("minor", ArgumentSemantic.Copy)]
+	NSNumber Minor { get; }
+
+	// @property (assign, nonatomic) BOOL notifyEntryStateOnDisplay;
+	[Export("notifyEntryStateOnDisplay")]
+	bool NotifyEntryStateOnDisplay { get; set; }
+}
+
+// @interface CLBeacon : NSObject <NSCopying, NSSecureCoding>
+[NoWatch, NoTV, NoMac, iOS(7, 0)]
+[BaseType(typeof(NSObject))]
+interface CLBeacon : INSCopying, INSSecureCoding
+{
+	// @property (readonly, copy, nonatomic) NSDate * _Nonnull timestamp __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("timestamp", ArgumentSemantic.Copy)]
+	NSDate Timestamp { get; }
+
+	// @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("UUID", ArgumentSemantic.Copy)]
+	NSUuid UUID { get; }
+
+	// @property (readonly, copy, nonatomic) NSUUID * _Nonnull proximityUUID __attribute__((availability(ios, introduced=7.0, deprecated=13.0)));
+	[Introduced(PlatformName.iOS, 7, 0)]
+	[Deprecated(PlatformName.iOS, 13, 0)]
+	[Export("proximityUUID", ArgumentSemantic.Copy)]
+	NSUuid ProximityUUID { get; }
+
+	// @property (readonly, copy, nonatomic) NSNumber * _Nonnull major;
+	[Export("major", ArgumentSemantic.Copy)]
+	NSNumber Major { get; }
+
+	// @property (readonly, copy, nonatomic) NSNumber * _Nonnull minor;
+	[Export("minor", ArgumentSemantic.Copy)]
+	NSNumber Minor { get; }
+
+	// @property (readonly, nonatomic) CLProximity proximity;
+	[Export("proximity")]
+	CLProximity Proximity { get; }
+
+	// @property (readonly, nonatomic) CLLocationAccuracy accuracy;
+	[Export("accuracy")]
+	double Accuracy { get; }
+
+	// @property (readonly, nonatomic) NSInteger rssi;
+	[Export("rssi")]
+	nint Rssi { get; }
+}
+
+[Static]
+[Verify(ConstantsInterfaceAssociation)]
+partial interface Constants
+{
+	// extern const CLLocationDegrees kCLHeadingFilterNone __attribute__((visibility("default")));
+	[Field("kCLHeadingFilterNone", "__Internal")]
+	double kCLHeadingFilterNone { get; }
+}
+
+// @interface CLHeading : NSObject <NSCopying, NSSecureCoding>
+[Watch(2, 0), NoTV, Mac(10, 7), iOS(3, 0)]
+[BaseType(typeof(NSObject))]
+interface CLHeading : INSCopying, INSSecureCoding
+{
+	// @property (readonly, nonatomic) CLLocationDirection magneticHeading;
+	[Export("magneticHeading")]
+	double MagneticHeading { get; }
+
+	// @property (readonly, nonatomic) CLLocationDirection trueHeading;
+	[Export("trueHeading")]
+	double TrueHeading { get; }
+
+	// @property (readonly, nonatomic) CLLocationDirection headingAccuracy;
+	[Export("headingAccuracy")]
+	double HeadingAccuracy { get; }
+
+	// @property (readonly, nonatomic) CLHeadingComponentValue x;
+	[Export("x")]
+	double X { get; }
+
+	// @property (readonly, nonatomic) CLHeadingComponentValue y;
+	[Export("y")]
+	double Y { get; }
+
+	// @property (readonly, nonatomic) CLHeadingComponentValue z;
+	[Export("z")]
+	double Z { get; }
+
+	// @property (readonly, copy, nonatomic) NSDate * _Nonnull timestamp;
+	[Export("timestamp", ArgumentSemantic.Copy)]
+	NSDate Timestamp { get; }
+}
+
+// @interface CLLocationManager : NSObject
+[Mac(10, 6), iOS(2, 0)]
+[BaseType(typeof(NSObject))]
+interface CLLocationManager
+{
+	// +(BOOL)locationServicesEnabled __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(4, 0)]
+	[Static]
+	[Export("locationServicesEnabled")]
+	[Verify(MethodToProperty)]
+	bool LocationServicesEnabled { get; }
+
+	// +(BOOL)headingAvailable __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable)));
+	[Watch(2, 0), NoTV, Mac(10, 7), iOS(4, 0)]
+	[Static]
+	[Export("headingAvailable")]
+	[Verify(MethodToProperty)]
+	bool HeadingAvailable { get; }
+
+	// +(BOOL)significantLocationChangeMonitoringAvailable __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 7), iOS(4, 0)]
+	[Static]
+	[Export("significantLocationChangeMonitoringAvailable")]
+	[Verify(MethodToProperty)]
+	bool SignificantLocationChangeMonitoringAvailable { get; }
+
+	// +(BOOL)isMonitoringAvailableForClass:(Class _Nonnull)regionClass __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 10), iOS(7, 0)]
+	[Static]
+	[Export("isMonitoringAvailableForClass:")]
+	bool IsMonitoringAvailableForClass(Class regionClass);
+
+	// +(BOOL)regionMonitoringAvailable __attribute__((availability(ios, introduced=4.0, deprecated=7.0))) __attribute__((availability(macos, introduced=10.8, deprecated=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 4, 0)]
+	[Deprecated(PlatformName.iOS, 7, 0)]
+	[Introduced(PlatformName.MacOSX, 10, 8)]
+	[Deprecated(PlatformName.MacOSX, 10, 10)]
+	[NoWatch, NoTV]
+	[Static]
+	[Export("regionMonitoringAvailable")]
+	[Verify(MethodToProperty)]
+	bool RegionMonitoringAvailable { get; }
+
+	// +(BOOL)regionMonitoringEnabled __attribute__((availability(ios, introduced=4.0, deprecated=6.0))) __attribute__((availability(macos, introduced=10.8, deprecated=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 4, 0, message: "Use +isMonitoringAvailableForClass: and +authorizationStatus instead")]
+	[Deprecated(PlatformName.iOS, 6, 0, message: "Use +isMonitoringAvailableForClass: and +authorizationStatus instead")]
+	[Introduced(PlatformName.MacOSX, 10, 8, message: "Use +isMonitoringAvailableForClass: and +authorizationStatus instead")]
+	[Deprecated(PlatformName.MacOSX, 10, 10, message: "Use +isMonitoringAvailableForClass: and +authorizationStatus instead")]
+	[NoWatch, NoTV]
+	[Static]
+	[Export("regionMonitoringEnabled")]
+	[Verify(MethodToProperty)]
+	bool RegionMonitoringEnabled { get; }
+
+	// +(BOOL)isRangingAvailable __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(7, 0)]
+	[Static]
+	[Export("isRangingAvailable")]
+	[Verify(MethodToProperty)]
+	bool IsRangingAvailable { get; }
+
+	// +(CLAuthorizationStatus)authorizationStatus __attribute__((availability(ios, introduced=4.2))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(4, 2)]
+	[Static]
+	[Export("authorizationStatus")]
+	[Verify(MethodToProperty)]
+	CLAuthorizationStatus AuthorizationStatus { get; }
+
+	[Wrap("WeakDelegate")]
+	[NullAllowed]
+	CLLocationManagerDelegate Delegate { get; set; }
+
+	// @property (nonatomic, weak) id<CLLocationManagerDelegate> _Nullable delegate;
+	[NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
+	NSObject WeakDelegate { get; set; }
+
+	// @property (readonly, nonatomic) BOOL locationServicesEnabled __attribute__((availability(ios, introduced=2.0, deprecated=4.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 2, 0)]
+	[Deprecated(PlatformName.iOS, 4, 0)]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("locationServicesEnabled")]
+	bool LocationServicesEnabled { get; }
+
+	// @property (copy, nonatomic) NSString * _Nullable purpose __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(ios, introduced=3.2, deprecated=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 3, 2, message: "Set the purpose string in Info.plist using key NSLocationUsageDescription")]
+	[Deprecated(PlatformName.iOS, 6, 0, message: "Set the purpose string in Info.plist using key NSLocationUsageDescription")]
+	[NoWatch, NoTV, Mac(10, 7)]
+	[NullAllowed, Export("purpose")]
+	string Purpose { get; set; }
+
+	// @property (assign, nonatomic) CLActivityType activityType __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(4, 0), NoTV, NoMac, iOS(6, 0)]
+	[Export("activityType", ArgumentSemantic.Assign)]
+	CLActivityType ActivityType { get; set; }
+
+	// @property (assign, nonatomic) CLLocationDistance distanceFilter;
+	[Export("distanceFilter")]
+	double DistanceFilter { get; set; }
+
+	// @property (assign, nonatomic) CLLocationAccuracy desiredAccuracy;
+	[Export("desiredAccuracy")]
+	double DesiredAccuracy { get; set; }
+
+	// @property (assign, nonatomic) BOOL pausesLocationUpdatesAutomatically __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(6, 0)]
+	[Export("pausesLocationUpdatesAutomatically")]
+	bool PausesLocationUpdatesAutomatically { get; set; }
+
+	// @property (assign, nonatomic) BOOL allowsBackgroundLocationUpdates __attribute__((availability(ios, introduced=9.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(4, 0), NoTV, NoMac, iOS(9, 0)]
+	[Export("allowsBackgroundLocationUpdates")]
+	bool AllowsBackgroundLocationUpdates { get; set; }
+
+	// @property (assign, nonatomic) BOOL showsBackgroundLocationIndicator __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(11, 0)]
+	[Export("showsBackgroundLocationIndicator")]
+	bool ShowsBackgroundLocationIndicator { get; set; }
+
+	// @property (readonly, copy, nonatomic) CLLocation * _Nullable location;
+	[NullAllowed, Export("location", ArgumentSemantic.Copy)]
+	CLLocation Location { get; }
+
+	// @property (readonly, nonatomic) BOOL headingAvailable __attribute__((availability(ios, introduced=3.0, deprecated=4.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 3, 0)]
+	[Deprecated(PlatformName.iOS, 4, 0)]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("headingAvailable")]
+	bool HeadingAvailable { get; }
+
+	// @property (assign, nonatomic) CLLocationDegrees headingFilter __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
+	[Export("headingFilter")]
+	double HeadingFilter { get; set; }
+
+	// @property (assign, nonatomic) CLDeviceOrientation headingOrientation __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(2, 0), NoTV, NoMac, iOS(4, 0)]
+	[Export("headingOrientation", ArgumentSemantic.Assign)]
+	CLDeviceOrientation HeadingOrientation { get; set; }
+
+	// @property (readonly, copy, nonatomic) CLHeading * _Nullable heading __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(2, 0), NoTV, NoMac, iOS(4, 0)]
+	[NullAllowed, Export("heading", ArgumentSemantic.Copy)]
+	CLHeading Heading { get; }
+
+	// @property (readonly, nonatomic) CLLocationDistance maximumRegionMonitoringDistance __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
+	[Export("maximumRegionMonitoringDistance")]
+	double MaximumRegionMonitoringDistance { get; }
+
+	// @property (readonly, copy, nonatomic) NSSet<__kindof CLRegion *> * _Nonnull monitoredRegions __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
+	[Export("monitoredRegions", ArgumentSemantic.Copy)]
+	NSSet<CLRegion> MonitoredRegions { get; }
+
+	// @property (readonly, copy, nonatomic) NSSet<__kindof CLRegion *> * _Nonnull rangedRegions __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 7, 0, message: "Use -rangedBeaconConstraints")]
+	[Deprecated(PlatformName.iOS, 13, 0, message: "Use -rangedBeaconConstraints")]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("rangedRegions", ArgumentSemantic.Copy)]
+	NSSet<CLRegion> RangedRegions { get; }
+
+	// @property (readonly, copy, nonatomic) NSSet<CLBeaconIdentityConstraint *> * _Nonnull rangedBeaconConstraints __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("rangedBeaconConstraints", ArgumentSemantic.Copy)]
+	NSSet<CLBeaconIdentityConstraint> RangedBeaconConstraints { get; }
+
+	// -(void)requestWhenInUseAuthorization __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(macos, unavailable)));
+	[NoMac, iOS(8, 0)]
+	[Export("requestWhenInUseAuthorization")]
+	void RequestWhenInUseAuthorization();
+
+	// -(void)requestAlwaysAuthorization __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(macos, introduced=10.15))) __attribute__((availability(tvos, unavailable)));
+	[NoTV, Mac(10, 15), iOS(8, 0)]
+	[Export("requestAlwaysAuthorization")]
+	void RequestAlwaysAuthorization();
+
+	// -(void)startUpdatingLocation __attribute__((availability(watchos, introduced=3.0))) __attribute__((availability(tvos, unavailable)));
+	[Watch(3, 0), NoTV]
+	[Export("startUpdatingLocation")]
+	void StartUpdatingLocation();
+
+	// -(void)stopUpdatingLocation;
+	[Export("stopUpdatingLocation")]
+	void StopUpdatingLocation();
+
+	// -(void)requestLocation __attribute__((availability(ios, introduced=9.0))) __attribute__((availability(macos, introduced=10.14)));
+	[Mac(10, 14), iOS(9, 0)]
+	[Export("requestLocation")]
+	void RequestLocation();
+
+	// -(void)startUpdatingHeading __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
+	[Export("startUpdatingHeading")]
+	void StartUpdatingHeading();
+
+	// -(void)stopUpdatingHeading __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
+	[Export("stopUpdatingHeading")]
+	void StopUpdatingHeading();
+
+	// -(void)dismissHeadingCalibrationDisplay __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
+	[Export("dismissHeadingCalibrationDisplay")]
+	void DismissHeadingCalibrationDisplay();
+
+	// -(void)startMonitoringSignificantLocationChanges __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 7), iOS(4, 0)]
+	[Export("startMonitoringSignificantLocationChanges")]
+	void StartMonitoringSignificantLocationChanges();
+
+	// -(void)stopMonitoringSignificantLocationChanges __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.7))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 7), iOS(4, 0)]
+	[Export("stopMonitoringSignificantLocationChanges")]
+	void StopMonitoringSignificantLocationChanges();
+
+	// -(void)startMonitoringForRegion:(CLRegion * _Nonnull)region desiredAccuracy:(CLLocationAccuracy)accuracy __attribute__((availability(ios, introduced=4.0, deprecated=6.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 4, 0)]
+	[Deprecated(PlatformName.iOS, 6, 0)]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("startMonitoringForRegion:desiredAccuracy:")]
+	void StartMonitoringForRegion(CLRegion region, double accuracy);
+
+	// -(void)stopMonitoringForRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
+	[Export("stopMonitoringForRegion:")]
+	void StopMonitoringForRegion(CLRegion region);
+
+	// -(void)startMonitoringForRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=5.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 8), iOS(5, 0)]
+	[Export("startMonitoringForRegion:")]
+	void StartMonitoringForRegion(CLRegion region);
+
+	// -(void)requestStateForRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 10), iOS(7, 0)]
+	[Export("requestStateForRegion:")]
+	void RequestStateForRegion(CLRegion region);
+
+	// -(void)startRangingBeaconsInRegion:(CLBeaconRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 7, 0, message: "Use -startRangingBeaconsSatisfyingConstraint:")]
+	[Deprecated(PlatformName.iOS, 13, 0, message: "Use -startRangingBeaconsSatisfyingConstraint:")]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("startRangingBeaconsInRegion:")]
+	void StartRangingBeaconsInRegion(CLBeaconRegion region);
+
+	// -(void)stopRangingBeaconsInRegion:(CLBeaconRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 7, 0, message: "Use -stopRangingBeaconsSatisfyingConstraint:")]
+	[Deprecated(PlatformName.iOS, 13, 0, message: "Use -stopRangingBeaconsSatisfyingConstraint:")]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("stopRangingBeaconsInRegion:")]
+	void StopRangingBeaconsInRegion(CLBeaconRegion region);
+
+	// -(void)startRangingBeaconsSatisfyingConstraint:(CLBeaconIdentityConstraint * _Nonnull)constraint __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("startRangingBeaconsSatisfyingConstraint:")]
+	void StartRangingBeaconsSatisfyingConstraint(CLBeaconIdentityConstraint constraint);
+
+	// -(void)stopRangingBeaconsSatisfyingConstraint:(CLBeaconIdentityConstraint * _Nonnull)constraint __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("stopRangingBeaconsSatisfyingConstraint:")]
+	void StopRangingBeaconsSatisfyingConstraint(CLBeaconIdentityConstraint constraint);
+
+	// -(void)allowDeferredLocationUpdatesUntilTraveled:(CLLocationDistance)distance timeout:(NSTimeInterval)timeout __attribute__((availability(ios, introduced=6.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 6, 0, message: "You can remove calls to this method")]
+	[Deprecated(PlatformName.iOS, 13, 0, message: "You can remove calls to this method")]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("allowDeferredLocationUpdatesUntilTraveled:timeout:")]
+	void AllowDeferredLocationUpdatesUntilTraveled(double distance, double timeout);
+
+	// -(void)disallowDeferredLocationUpdates __attribute__((availability(ios, introduced=6.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 6, 0, message: "You can remove calls to this method")]
+	[Deprecated(PlatformName.iOS, 13, 0, message: "You can remove calls to this method")]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("disallowDeferredLocationUpdates")]
+	void DisallowDeferredLocationUpdates();
+
+	// +(BOOL)deferredLocationUpdatesAvailable __attribute__((availability(ios, introduced=6.0, deprecated=13.0))) __attribute__((availability(macos, introduced=10.9, deprecated=10.15))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 6, 0, message: "You can remove calls to this method")]
+	[Deprecated(PlatformName.iOS, 13, 0, message: "You can remove calls to this method")]
+	[Introduced(PlatformName.MacOSX, 10, 9, message: "You can remove calls to this method")]
+	[Deprecated(PlatformName.MacOSX, 10, 15, message: "You can remove calls to this method")]
+	[NoWatch, NoTV]
+	[Static]
+	[Export("deferredLocationUpdatesAvailable")]
+	[Verify(MethodToProperty)]
+	bool DeferredLocationUpdatesAvailable { get; }
+}
+
+// @interface CLVisit : NSObject <NSSecureCoding, NSCopying>
+[NoWatch, NoTV, NoMac, iOS(8, 0)]
+[BaseType(typeof(NSObject))]
+interface CLVisit : INSSecureCoding, INSCopying
+{
+	// @property (readonly, copy, nonatomic) NSDate * _Nonnull arrivalDate;
+	[Export("arrivalDate", ArgumentSemantic.Copy)]
+	NSDate ArrivalDate { get; }
+
+	// @property (readonly, copy, nonatomic) NSDate * _Nonnull departureDate;
+	[Export("departureDate", ArgumentSemantic.Copy)]
+	NSDate DepartureDate { get; }
+
+	// @property (readonly, nonatomic) CLLocationCoordinate2D coordinate;
+	[Export("coordinate")]
+	CLLocationCoordinate2D Coordinate { get; }
+
+	// @property (readonly, nonatomic) CLLocationAccuracy horizontalAccuracy;
+	[Export("horizontalAccuracy")]
+	double HorizontalAccuracy { get; }
+}
+
+// @protocol CLLocationManagerDelegate <NSObject>
+[Protocol, Model(AutoGeneratedName = true)]
+[BaseType(typeof(NSObject))]
+interface CLLocationManagerDelegate
+{
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateToLocation:(CLLocation * _Nonnull)newLocation fromLocation:(CLLocation * _Nonnull)oldLocation __attribute__((availability(macos, introduced=10.6))) __attribute__((availability(ios, introduced=2.0, deprecated=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 2, 0, message: "Implement -locationManager:didUpdateLocations: instead")]
+	[Deprecated(PlatformName.iOS, 6, 0, message: "Implement -locationManager:didUpdateLocations: instead")]
+	[NoWatch, NoTV, Mac(10, 6)]
+	[Export("locationManager:didUpdateToLocation:fromLocation:")]
+	void LocationManager(CLLocationManager manager, CLLocation newLocation, CLLocation oldLocation);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(macos, introduced=10.9)));
+	[Mac(10, 9), iOS(6, 0)]
+	[Export("locationManager:didUpdateLocations:")]
+	void LocationManager(CLLocationManager manager, CLLocation[] locations);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateHeading:(CLHeading * _Nonnull)newHeading __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
+	[Export("locationManager:didUpdateHeading:")]
+	void LocationManager(CLLocationManager manager, CLHeading newHeading);
+
+	// @optional -(BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager * _Nonnull)manager __attribute__((availability(ios, introduced=3.0))) __attribute__((availability(watchos, introduced=2.0))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[Watch(2, 0), NoTV, NoMac, iOS(3, 0)]
+	[Export("locationManagerShouldDisplayHeadingCalibration:")]
+	bool LocationManagerShouldDisplayHeadingCalibration(CLLocationManager manager);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0))) __attribute__((availability(macos, introduced=10.10))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 10), iOS(7, 0)]
+	[Export("locationManager:didDetermineState:forRegion:")]
+	void LocationManager(CLLocationManager manager, CLRegionState state, CLRegion region);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didRangeBeacons:(NSArray<CLBeacon *> * _Nonnull)beacons inRegion:(CLBeaconRegion * _Nonnull)region __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 7, 0)]
+	[Deprecated(PlatformName.iOS, 13, 0)]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("locationManager:didRangeBeacons:inRegion:")]
+	void LocationManager(CLLocationManager manager, CLBeacon[] beacons, CLBeaconRegion region);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion * _Nonnull)region withError:(NSError * _Nonnull)error __attribute__((availability(ios, introduced=7.0, deprecated=13.0))) __attribute__((availability(macos, unavailable))) __attribute__((availability(macCatalyst, unavailable))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[Introduced(PlatformName.iOS, 7, 0)]
+	[Deprecated(PlatformName.iOS, 13, 0)]
+	[Unavailable(PlatformName.MacCatalyst)]
+	[NoWatch, NoTV, NoMac]
+	[Advice("This API is not available when using UIKit on macOS.")]
+	[Export("locationManager:rangingBeaconsDidFailForRegion:withError:")]
+	void LocationManager(CLLocationManager manager, CLBeaconRegion region, NSError error);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didRangeBeacons:(NSArray<CLBeacon *> * _Nonnull)beacons satisfyingConstraint:(CLBeaconIdentityConstraint * _Nonnull)beaconConstraint __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("locationManager:didRangeBeacons:satisfyingConstraint:")]
+	void LocationManager(CLLocationManager manager, CLBeacon[] beacons, CLBeaconIdentityConstraint beaconConstraint);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didFailRangingBeaconsForConstraint:(CLBeaconIdentityConstraint * _Nonnull)beaconConstraint error:(NSError * _Nonnull)error __attribute__((availability(ios, introduced=13.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(13, 0)]
+	[Export("locationManager:didFailRangingBeaconsForConstraint:error:")]
+	void LocationManager(CLLocationManager manager, CLBeaconIdentityConstraint beaconConstraint, NSError error);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didEnterRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
+	[Export("locationManager:didEnterRegion:")]
+	void LocationManager(CLLocationManager manager, CLRegion region);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didExitRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
+	[Export("locationManager:didExitRegion:")]
+	void LocationManager(CLLocationManager manager, CLRegion region);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nonnull)error;
+	[Export("locationManager:didFailWithError:")]
+	void LocationManager(CLLocationManager manager, NSError error);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager monitoringDidFailForRegion:(CLRegion * _Nullable)region withError:(NSError * _Nonnull)error __attribute__((availability(ios, introduced=4.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 8), iOS(4, 0)]
+	[Export("locationManager:monitoringDidFailForRegion:withError:")]
+	void LocationManager(CLLocationManager manager, [NullAllowed] CLRegion region, NSError error);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status __attribute__((availability(ios, introduced=4.2))) __attribute__((availability(macos, introduced=10.7)));
+	[Mac(10, 7), iOS(4, 2)]
+	[Export("locationManager:didChangeAuthorizationStatus:")]
+	void LocationManager(CLLocationManager manager, CLAuthorizationStatus status);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didStartMonitoringForRegion:(CLRegion * _Nonnull)region __attribute__((availability(ios, introduced=5.0))) __attribute__((availability(macos, introduced=10.8))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 8), iOS(5, 0)]
+	[Export("locationManager:didStartMonitoringForRegion:")]
+	void LocationManager(CLLocationManager manager, CLRegion region);
+
+	// @optional -(void)locationManagerDidPauseLocationUpdates:(CLLocationManager * _Nonnull)manager __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(6, 0)]
+	[Export("locationManagerDidPauseLocationUpdates:")]
+	void LocationManagerDidPauseLocationUpdates(CLLocationManager manager);
+
+	// @optional -(void)locationManagerDidResumeLocationUpdates:(CLLocationManager * _Nonnull)manager __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(6, 0)]
+	[Export("locationManagerDidResumeLocationUpdates:")]
+	void LocationManagerDidResumeLocationUpdates(CLLocationManager manager);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didFinishDeferredUpdatesWithError:(NSError * _Nullable)error __attribute__((availability(ios, introduced=6.0))) __attribute__((availability(macos, introduced=10.9))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable)));
+	[NoWatch, NoTV, Mac(10, 9), iOS(6, 0)]
+	[Export("locationManager:didFinishDeferredUpdatesWithError:")]
+	void LocationManager(CLLocationManager manager, [NullAllowed] NSError error);
+
+	// @optional -(void)locationManager:(CLLocationManager * _Nonnull)manager didVisit:(CLVisit * _Nonnull)visit __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(8, 0)]
+	[Export("locationManager:didVisit:")]
+	void LocationManager(CLLocationManager manager, CLVisit visit);
+}
+
+// @interface CLVisitExtensions (CLLocationManager)
+[Category]
+[BaseType(typeof(CLLocationManager))]
+interface CLLocationManager_CLVisitExtensions
+{
+	// -(void)startMonitoringVisits __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(8, 0)]
+	[Export("startMonitoringVisits")]
+	void StartMonitoringVisits();
+
+	// -(void)stopMonitoringVisits __attribute__((availability(ios, introduced=8.0))) __attribute__((availability(watchos, unavailable))) __attribute__((availability(tvos, unavailable))) __attribute__((availability(macos, unavailable)));
+	[NoWatch, NoTV, NoMac, iOS(8, 0)]
+	[Export("stopMonitoringVisits")]
+	void StopMonitoringVisits();
+}
+
+// @interface CLPlacemark : NSObject <NSCopying, NSSecureCoding>
+[Mac(10, 8), iOS(5, 0)]
+[BaseType(typeof(NSObject))]
+interface CLPlacemark : INSCopying, INSSecureCoding
+{
+	// -(instancetype _Nonnull)initWithPlacemark:(CLPlacemark * _Nonnull)placemark;
+	[Export("initWithPlacemark:")]
+	IntPtr Constructor(CLPlacemark placemark);
+
+	// @property (readonly, copy, nonatomic) CLLocation * _Nullable location;
+	[NullAllowed, Export("location", ArgumentSemantic.Copy)]
+	CLLocation Location { get; }
+
+	// @property (readonly, copy, nonatomic) CLRegion * _Nullable region;
+	[NullAllowed, Export("region", ArgumentSemantic.Copy)]
+	CLRegion Region { get; }
+
+	// @property (readonly, copy, nonatomic) NSTimeZone * _Nullable timeZone __attribute__((availability(ios, introduced=9.0)));
+	[iOS(9, 0)]
+	[NullAllowed, Export("timeZone", ArgumentSemantic.Copy)]
+	NSTimeZone TimeZone { get; }
+
+	// @property (readonly, copy, nonatomic) NSDictionary * _Nullable addressDictionary __attribute__((availability(macos, introduced=10.8, deprecated=10.13))) __attribute__((availability(ios, introduced=5.0, deprecated=11.0))) __attribute__((availability(watchos, introduced=1.0, deprecated=4.0)));
+	[Introduced(PlatformName.MacOSX, 10, 8, message: "Use @properties")]
+	[Deprecated(PlatformName.MacOSX, 10, 13, message: "Use @properties")]
+	[Introduced(PlatformName.iOS, 5, 0, message: "Use @properties")]
+	[Deprecated(PlatformName.iOS, 11, 0, message: "Use @properties")]
+	[Introduced(PlatformName.WatchOS, 1, 0, message: "Use @properties")]
+	[Deprecated(PlatformName.WatchOS, 4, 0, message: "Use @properties")]
+	[NullAllowed, Export("addressDictionary", ArgumentSemantic.Copy)]
+	NSDictionary AddressDictionary { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable name;
+	[NullAllowed, Export("name")]
+	string Name { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable thoroughfare;
+	[NullAllowed, Export("thoroughfare")]
+	string Thoroughfare { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable subThoroughfare;
+	[NullAllowed, Export("subThoroughfare")]
+	string SubThoroughfare { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable locality;
+	[NullAllowed, Export("locality")]
+	string Locality { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable subLocality;
+	[NullAllowed, Export("subLocality")]
+	string SubLocality { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable administrativeArea;
+	[NullAllowed, Export("administrativeArea")]
+	string AdministrativeArea { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable subAdministrativeArea;
+	[NullAllowed, Export("subAdministrativeArea")]
+	string SubAdministrativeArea { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable postalCode;
+	[NullAllowed, Export("postalCode")]
+	string PostalCode { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable ISOcountryCode;
+	[NullAllowed, Export("ISOcountryCode")]
+	string ISOcountryCode { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable country;
+	[NullAllowed, Export("country")]
+	string Country { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable inlandWater;
+	[NullAllowed, Export("inlandWater")]
+	string InlandWater { get; }
+
+	// @property (readonly, copy, nonatomic) NSString * _Nullable ocean;
+	[NullAllowed, Export("ocean")]
+	string Ocean { get; }
+
+	// @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nullable areasOfInterest;
+	[NullAllowed, Export("areasOfInterest", ArgumentSemantic.Copy)]
+	string[] AreasOfInterest { get; }
+}
+
+// @interface ContactsAdditions (CLPlacemark)
+[Category]
+[BaseType(typeof(CLPlacemark))]
+interface CLPlacemark_ContactsAdditions
+{
+	// @property (readonly, nonatomic) CNPostalAddress * _Nullable postalAddress __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable)));
+	[Watch(4, 0), NoTV, Mac(10, 13), iOS(11, 0)]
+	[NullAllowed, Export("postalAddress")]
+	CNPostalAddress PostalAddress { get; }
+}
+
+// typedef void (^CLGeocodeCompletionHandler)(NSArray<CLPlacemark *> * _Nullable, NSError * _Nullable);
+delegate void CLGeocodeCompletionHandler([NullAllowed] CLPlacemark[] arg0, [NullAllowed] NSError arg1);
+
+// @interface CLGeocoder : NSObject
+[Mac(10, 8), iOS(5, 0)]
+[BaseType(typeof(NSObject))]
+interface CLGeocoder
+{
+	// @property (readonly, getter = isGeocoding, nonatomic) BOOL geocoding;
+	[Export("geocoding")]
+	bool Geocoding { [Bind("isGeocoding")] get; }
+
+	// -(void)reverseGeocodeLocation:(CLLocation * _Nonnull)location completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler;
+	[Export("reverseGeocodeLocation:completionHandler:")]
+	void ReverseGeocodeLocation(CLLocation location, CLGeocodeCompletionHandler completionHandler);
+
+	// -(void)reverseGeocodeLocation:(CLLocation * _Nonnull)location preferredLocale:(NSLocale * _Nullable)locale completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, introduced=11.0)));
+	[Watch(4, 0), TV(11, 0), Mac(10, 13), iOS(11, 0)]
+	[Export("reverseGeocodeLocation:preferredLocale:completionHandler:")]
+	void ReverseGeocodeLocation(CLLocation location, [NullAllowed] NSLocale locale, CLGeocodeCompletionHandler completionHandler);
+
+	// -(void)geocodeAddressDictionary:(NSDictionary * _Nonnull)addressDictionary completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(macos, introduced=10.8, deprecated=10.13))) __attribute__((availability(ios, introduced=5.0, deprecated=11.0))) __attribute__((availability(watchos, introduced=1.0, deprecated=4.0)));
+	[Introduced(PlatformName.MacOSX, 10, 8, message: "Use -geocodePostalAddress:completionHandler:")]
+	[Deprecated(PlatformName.MacOSX, 10, 13, message: "Use -geocodePostalAddress:completionHandler:")]
+	[Introduced(PlatformName.iOS, 5, 0, message: "Use -geocodePostalAddress:completionHandler:")]
+	[Deprecated(PlatformName.iOS, 11, 0, message: "Use -geocodePostalAddress:completionHandler:")]
+	[Introduced(PlatformName.WatchOS, 1, 0, message: "Use -geocodePostalAddress:completionHandler:")]
+	[Deprecated(PlatformName.WatchOS, 4, 0, message: "Use -geocodePostalAddress:completionHandler:")]
+	[Export("geocodeAddressDictionary:completionHandler:")]
+	void GeocodeAddressDictionary(NSDictionary addressDictionary, CLGeocodeCompletionHandler completionHandler);
+
+	// -(void)geocodeAddressString:(NSString * _Nonnull)addressString completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler;
+	[Export("geocodeAddressString:completionHandler:")]
+	void GeocodeAddressString(string addressString, CLGeocodeCompletionHandler completionHandler);
+
+	// -(void)geocodeAddressString:(NSString * _Nonnull)addressString inRegion:(CLRegion * _Nullable)region completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler;
+	[Export("geocodeAddressString:inRegion:completionHandler:")]
+	void GeocodeAddressString(string addressString, [NullAllowed] CLRegion region, CLGeocodeCompletionHandler completionHandler);
+
+	// -(void)geocodeAddressString:(NSString * _Nonnull)addressString inRegion:(CLRegion * _Nullable)region preferredLocale:(NSLocale * _Nullable)locale completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, introduced=11.0)));
+	[Watch(4, 0), TV(11, 0), Mac(10, 13), iOS(11, 0)]
+	[Export("geocodeAddressString:inRegion:preferredLocale:completionHandler:")]
+	void GeocodeAddressString(string addressString, [NullAllowed] CLRegion region, [NullAllowed] NSLocale locale, CLGeocodeCompletionHandler completionHandler);
+
+	// -(void)cancelGeocode;
+	[Export("cancelGeocode")]
+	void CancelGeocode();
+}
+
+// @interface ContactsAdditions (CLGeocoder)
+[Category]
+[BaseType(typeof(CLGeocoder))]
+interface CLGeocoder_ContactsAdditions
+{
+	// -(void)geocodePostalAddress:(CNPostalAddress * _Nonnull)postalAddress completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable)));
+	[Watch(4, 0), NoTV, Mac(10, 13), iOS(11, 0)]
+	[Export("geocodePostalAddress:completionHandler:")]
+	void GeocodePostalAddress(CNPostalAddress postalAddress, CLGeocodeCompletionHandler completionHandler);
+
+	// -(void)geocodePostalAddress:(CNPostalAddress * _Nonnull)postalAddress preferredLocale:(NSLocale * _Nullable)locale completionHandler:(CLGeocodeCompletionHandler _Nonnull)completionHandler __attribute__((availability(macos, introduced=10.13))) __attribute__((availability(ios, introduced=11.0))) __attribute__((availability(watchos, introduced=4.0))) __attribute__((availability(tvos, unavailable)));
+	[Watch(4, 0), NoTV, Mac(10, 13), iOS(11, 0)]
+	[Export("geocodePostalAddress:preferredLocale:completionHandler:")]
+	void GeocodePostalAddress(CNPostalAddress postalAddress, [NullAllowed] NSLocale locale, CLGeocodeCompletionHandler completionHandler);
+}
+
+// @interface VMEPosition : NSObject <NSCopying>
+[BaseType(typeof(NSObject))]
+interface VMEPosition : INSCopying
+{
+	// -(instancetype)initWithLatitude:(double)latitude longitude:(double)longitude altitude:(double)altitude buildingID:(NSString *)buildingID floorID:(NSString *)floorID;
+	[Export("initWithLatitude:longitude:altitude:buildingID:floorID:")]
+	IntPtr Constructor(double latitude, double longitude, double altitude, string buildingID, string floorID);
+
+	// -(instancetype)initWithLatitude:(double)latitude longitude:(double)longitude altitude:(double)altitude;
+	[Export("initWithLatitude:longitude:altitude:")]
+	IntPtr Constructor(double latitude, double longitude, double altitude);
+
+	// -(BOOL)isEqualToPosition:(VMEPosition *)position;
+	[Export("isEqualToPosition:")]
+	bool IsEqualToPosition(VMEPosition position);
+
+	// @property (nonatomic) double latitude;
+	[Export("latitude")]
+	double Latitude { get; set; }
+
+	// @property (nonatomic) double longitude;
+	[Export("longitude")]
+	double Longitude { get; set; }
+
+	// @property (nonatomic) double altitude;
+	[Export("altitude")]
+	double Altitude { get; set; }
+
+	// @property (nonatomic, strong) NSString * buildingID;
+	[Export("buildingID", ArgumentSemantic.Strong)]
+	string BuildingID { get; set; }
+
+	// @property (nonatomic, strong) NSString * floorID;
+	[Export("floorID", ArgumentSemantic.Strong)]
+	string FloorID { get; set; }
+}
+
+// @interface VMERouteRequest : NSObject <NSCopying>
+[BaseType(typeof(NSObject))]
+interface VMERouteRequest : INSCopying
+{
+	// -(instancetype)initWithAccessible:(BOOL)isAccessible optimize:(BOOL)isOptimized __attribute__((deprecated("Please use initWithRequestType:destinationsOrder:accessible:")));
+	[Export("initWithAccessible:optimize:")]
+	IntPtr Constructor(bool isAccessible, bool isOptimized);
+
+	// -(instancetype)initWithRequestType:(VMERouteRequestType)requestType destinationsOrder:(VMERouteDestinationsOrder)destinationsOrder;
+	[Export("initWithRequestType:destinationsOrder:")]
+	IntPtr Constructor(VMERouteRequestType requestType, VMERouteDestinationsOrder destinationsOrder);
+
+	// -(instancetype)initWithRequestType:(VMERouteRequestType)requestType destinationsOrder:(VMERouteDestinationsOrder)destinationsOrder accessible:(BOOL)isAccessible;
+	[Export("initWithRequestType:destinationsOrder:accessible:")]
+	IntPtr Constructor(VMERouteRequestType requestType, VMERouteDestinationsOrder destinationsOrder, bool isAccessible);
+
+	// -(id)getOrigin;
+	[Export("getOrigin")]
+	[Verify(MethodToProperty)]
+	NSObject Origin { get; }
+
+	// -(void)setOriginWithPlaceID:(NSString *)placeID __attribute__((deprecated("Please use setOrigin:")));
+	[Export("setOriginWithPlaceID:")]
+	void SetOriginWithPlaceID(string placeID);
+
+	// -(void)setOriginWithLocation:(CLLocation *)location __attribute__((deprecated("Please use setOrigin:")));
+	[Export("setOriginWithLocation:")]
+	void SetOriginWithLocation(CLLocation location);
+
+	// -(void)setOrigin:(id)origin;
+	[Export("setOrigin:")]
+	void SetOrigin(NSObject origin);
+
+	// -(NSArray *)getDestinations;
+	[Export("getDestinations")]
+	[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+	NSObject[] Destinations { get; }
+
+	// -(BOOL)addDestination:(id)destination;
+	[Export("addDestination:")]
+	bool AddDestination(NSObject destination);
+
+	// -(BOOL)addDestinations:(NSArray *)destinations;
+	[Export("addDestinations:")]
+	[Verify(StronglyTypedNSArray)]
+	bool AddDestinations(NSObject[] destinations);
+
+	// -(void)removeAllDestinations;
+	[Export("removeAllDestinations")]
+	void RemoveAllDestinations();
+
+	// -(void)removeDestinationAtIndex:(NSUInteger)index;
+	[Export("removeDestinationAtIndex:")]
+	void RemoveDestinationAtIndex(nuint index);
+
+	// -(BOOL)replaceDestinationAtIndex:(NSUInteger)index withDestination:(id)destination;
+	[Export("replaceDestinationAtIndex:withDestination:")]
+	bool ReplaceDestinationAtIndex(nuint index, NSObject destination);
+
+	// -(BOOL)isEqualToRouteRequest:(VMERouteRequest *)routeRequest;
+	[Export("isEqualToRouteRequest:")]
+	bool IsEqualToRouteRequest(VMERouteRequest routeRequest);
+
+	// @property (nonatomic) BOOL isAccessible;
+	[Export("isAccessible")]
+	bool IsAccessible { get; set; }
+
+	// @property (readonly) BOOL isOptimal __attribute__((deprecated("Please use destinationsOrder")));
+	[Export("isOptimal")]
+	bool IsOptimal { get; }
+
+	// @property (nonatomic) VMERouteDestinationsOrder destinationsOrder;
+	[Export("destinationsOrder", ArgumentSemantic.Assign)]
+	VMERouteDestinationsOrder DestinationsOrder { get; set; }
+
+	// @property (nonatomic) VMERouteRequestType requestType;
+	[Export("requestType", ArgumentSemantic.Assign)]
+	VMERouteRequestType RequestType { get; set; }
+}
+
+// @interface VMERouteResult : NSObject <NSCopying>
+[BaseType(typeof(NSObject))]
+interface VMERouteResult : INSCopying
+{
+	// -(instancetype)initWithDestinations:(NSArray *)destinations duration:(double)duration length:(double)length;
+	[Export("initWithDestinations:duration:length:")]
+	[Verify(StronglyTypedNSArray)]
+	IntPtr Constructor(NSObject[] destinations, double duration, double length);
+
+	// -(BOOL)isEqualToRouteResult:(VMERouteRequest *)routeRequest;
+	[Export("isEqualToRouteResult:")]
+	bool IsEqualToRouteResult(VMERouteRequest routeRequest);
+
+	// @property (readonly) double duration;
+	[Export("duration")]
+	double Duration { get; }
+
+	// @property (readonly) double length;
+	[Export("length")]
+	double Length { get; }
+
+	// @property (readonly) NSArray * destinations;
+	[Export("destinations")]
+	[Verify(StronglyTypedNSArray)]
+	NSObject[] Destinations { get; }
+}
+
+// @protocol VMEComputeRouteCallback <NSObject>
+/*
+Check whether adding [Model] to this declaration is appropriate.
+[Model] is used to generate a C# class that implements this protocol,
+and might be useful for protocols that consumers are supposed to implement,
+since consumers can subclass the generated class instead of implementing
+the generated interface. If consumers are not supposed to implement this
+protocol, then [Model] is redundant and will generate code that will never
+be used.
+*/
+[Protocol]
+[BaseType(typeof(NSObject))]
+interface VMEComputeRouteCallback
+{
+	// @optional -(void)computeRouteDidFinish:(VMEMapView *)mapView parameters:(VMERouteRequest *)routeRequest __attribute__((deprecated("Please use computeRouteDidFinish:parameters:result:")));
+	[Export("computeRouteDidFinish:parameters:")]
+	void ComputeRouteDidFinish(VMEMapView mapView, VMERouteRequest routeRequest);
+
+	// @required -(BOOL)computeRouteDidFinish:(VMEMapView *)mapView parameters:(VMERouteRequest *)routeRequest result:(VMERouteResult *)routeResult;
+	[Abstract]
+	[Export("computeRouteDidFinish:parameters:result:")]
+	bool ComputeRouteDidFinish(VMEMapView mapView, VMERouteRequest routeRequest, VMERouteResult routeResult);
+
+	// @required -(void)computeRouteDidFail:(VMEMapView *)mapView parameters:(VMERouteRequest *)routeRequest error:(NSString *)error;
+	[Abstract]
+	[Export("computeRouteDidFail:parameters:error:")]
+	void ComputeRouteDidFail(VMEMapView mapView, VMERouteRequest routeRequest, string error);
+}
+
+// @protocol VMEComputeRouteInterface <NSObject>
+/*
+Check whether adding [Model] to this declaration is appropriate.
+[Model] is used to generate a C# class that implements this protocol,
+and might be useful for protocols that consumers are supposed to implement,
+since consumers can subclass the generated class instead of implementing
+the generated interface. If consumers are not supposed to implement this
+protocol, then [Model] is redundant and will generate code that will never
+be used.
+*/
+[Protocol]
+[BaseType(typeof(NSObject))]
+interface VMEComputeRouteInterface
+{
+	// @required -(void)computeRoute:(VMERouteRequest *)routeRequest callback:(id<VMEComputeRouteCallback>)callback;
+	[Abstract]
+	[Export("computeRoute:callback:")]
+	void Callback(VMERouteRequest routeRequest, VMEComputeRouteCallback callback);
+}
+
+// @interface VMELocation : NSObject <NSCopying>
+[BaseType(typeof(NSObject))]
+interface VMELocation : INSCopying
+{
+	// -(instancetype)initWithPosition:(VMEPosition *)position bearing:(double)bearing accuracy:(double)accuracy;
+	[Export("initWithPosition:bearing:accuracy:")]
+	IntPtr Constructor(VMEPosition position, double bearing, double accuracy);
+
+	// @property (nonatomic) VMEPosition * position;
+	[Export("position", ArgumentSemantic.Assign)]
+	VMEPosition Position { get; set; }
+
+	// @property (nonatomic) double accuracy;
+	[Export("accuracy")]
+	double Accuracy { get; set; }
+
+	// @property (nonatomic) double bearing;
+	[Export("bearing")]
+	double Bearing { get; set; }
+}
+
+// @protocol VMELocationInterface <NSObject>
+/*
+Check whether adding [Model] to this declaration is appropriate.
+[Model] is used to generate a C# class that implements this protocol,
+and might be useful for protocols that consumers are supposed to implement,
+since consumers can subclass the generated class instead of implementing
+the generated interface. If consumers are not supposed to implement this
+protocol, then [Model] is redundant and will generate code that will never
+be used.
+*/
+[Protocol]
+[BaseType(typeof(NSObject))]
+interface VMELocationInterface
+{
+	// @required -(void)updateLocation:(VMELocation *)update;
+	[Abstract]
+	[Export("updateLocation:")]
+	void UpdateLocation(VMELocation update);
+
+	// @required -(VMELocation *)createLocationFromLocation:(CLLocation *)location;
+	[Abstract]
+	[Export("createLocationFromLocation:")]
+	VMELocation CreateLocationFromLocation(CLLocation location);
+
+	// @required -(VMEPosition *)createPositionFromLocation:(CLLocation *)location;
+	[Abstract]
+	[Export("createPositionFromLocation:")]
+	VMEPosition CreatePositionFromLocation(CLLocation location);
+}
+
+// @interface VMECameraHeading : NSObject
+[BaseType(typeof(NSObject))]
+interface VMECameraHeading
+{
+	// +(instancetype)cameraHeadingCurrent;
+	[Static]
+	[Export("cameraHeadingCurrent")]
+	VMECameraHeading CameraHeadingCurrent();
+
+	// +(instancetype)cameraHeadingForPlaceID:(NSString *)placeID;
+	[Static]
+	[Export("cameraHeadingForPlaceID:")]
+	VMECameraHeading CameraHeadingForPlaceID(string placeID);
+
+	// +(instancetype)cameraHeadingWithHeading:(float)heading;
+	[Static]
+	[Export("cameraHeadingWithHeading:")]
+	VMECameraHeading CameraHeadingWithHeading(float heading);
+}
+
+// @interface VMECameraUpdate : NSObject
+[BaseType(typeof(NSObject))]
+interface VMECameraUpdate
+{
+	// -(instancetype)initWithViewMode:(VMEViewMode)viewMode buildingID:(NSString *)buildingID floorID:(NSString *)floorID __attribute__((deprecated("Please use either: cameraUpdateForViewMode:heading:, cameraUpdateForViewMode:heading:buildingID: or cameraUpdateForViewMode:heading:floorID:")));
+	[Export("initWithViewMode:buildingID:floorID:")]
+	IntPtr Constructor(VMEViewMode viewMode, string buildingID, string floorID);
+
+	// -(instancetype)initWithPlaceID:(NSString *)placeID __attribute__((deprecated("Please use cameraUpdateForPlaceID:")));
+	[Export("initWithPlaceID:")]
+	IntPtr Constructor(string placeID);
+
+	// -(instancetype)initWithPositions:(NSArray *)positions marginTop:(NSUInteger)marginTop marginBottom:(NSUInteger)marginBottom marginLeft:(NSUInteger)marginLeft marginRight:(NSUInteger)marginRight heading:(NSNumber *)heading __attribute__((deprecated("Please use cameraUpdateForPositions:heading:paddingTop:paddingBottom:paddingLeft:paddingRight")));
+	[Export("initWithPositions:marginTop:marginBottom:marginLeft:marginRight:heading:")]
+	[Verify(StronglyTypedNSArray)]
+	IntPtr Constructor(NSObject[] positions, nuint marginTop, nuint marginBottom, nuint marginLeft, nuint marginRight, NSNumber heading);
+
+	// +(instancetype)cameraUpdateReset;
+	[Static]
+	[Export("cameraUpdateReset")]
+	VMECameraUpdate CameraUpdateReset();
+
+	// +(instancetype)cameraUpdateResetWithHeading:(VMECameraHeading *)heading;
+	[Static]
+	[Export("cameraUpdateResetWithHeading:")]
+	VMECameraUpdate CameraUpdateResetWithHeading(VMECameraHeading heading);
+
+	// +(instancetype)cameraUpdateForViewMode:(VMEViewMode)viewMode heading:(VMECameraHeading *)heading;
+	[Static]
+	[Export("cameraUpdateForViewMode:heading:")]
+	VMECameraUpdate CameraUpdateForViewMode(VMEViewMode viewMode, VMECameraHeading heading);
+
+	// +(instancetype)cameraUpdateForViewMode:(VMEViewMode)viewMode heading:(VMECameraHeading *)heading buildingID:(NSString *)buildingID;
+	[Static]
+	[Export("cameraUpdateForViewMode:heading:buildingID:")]
+	VMECameraUpdate CameraUpdateForViewMode(VMEViewMode viewMode, VMECameraHeading heading, string buildingID);
+
+	// +(instancetype)cameraUpdateForViewMode:(VMEViewMode)viewMode heading:(VMECameraHeading *)heading floorID:(NSString *)floorID;
+	[Static]
+	[Export("cameraUpdateForViewMode:heading:floorID:")]
+	VMECameraUpdate CameraUpdateForViewMode(VMEViewMode viewMode, VMECameraHeading heading, string floorID);
+
+	// +(instancetype)cameraUpdateForPlaceID:(NSString *)placeID;
+	[Static]
+	[Export("cameraUpdateForPlaceID:")]
+	VMECameraUpdate CameraUpdateForPlaceID(string placeID);
+
+	// +(instancetype)cameraUpdateForPlaceID:(NSString *)placeID heading:(VMECameraHeading *)heading paddingTop:(CGFloat)top paddingBottom:(CGFloat)bottom paddingLeft:(CGFloat)left paddingRight:(CGFloat)right;
+	[Static]
+	[Export("cameraUpdateForPlaceID:heading:paddingTop:paddingBottom:paddingLeft:paddingRight:")]
+	VMECameraUpdate CameraUpdateForPlaceID(string placeID, VMECameraHeading heading, nfloat top, nfloat bottom, nfloat left, nfloat right);
+
+	// +(instancetype)cameraUpdateForPositions:(NSArray *)positions heading:(VMECameraHeading *)heading paddingTop:(CGFloat)top paddingBottom:(CGFloat)bottom paddingLeft:(CGFloat)left paddingRight:(CGFloat)right;
+	[Static]
+	[Export("cameraUpdateForPositions:heading:paddingTop:paddingBottom:paddingLeft:paddingRight:")]
+	[Verify(StronglyTypedNSArray)]
+	VMECameraUpdate CameraUpdateForPositions(NSObject[] positions, VMECameraHeading heading, nfloat top, nfloat bottom, nfloat left, nfloat right);
+
+	// +(instancetype)cameraUpdateForPosition:(VMEPosition *)position heading:(VMECameraHeading *)heading minAltitude:(double)minAltitude maxAltitude:(double)maxAltitude;
+	[Static]
+	[Export("cameraUpdateForPosition:heading:minAltitude:maxAltitude:")]
+	VMECameraUpdate CameraUpdateForPosition(VMEPosition position, VMECameraHeading heading, double minAltitude, double maxAltitude);
+}
+
+// @interface VMESceneUpdate : NSObject
+[BaseType(typeof(NSObject))]
+interface VMESceneUpdate
+{
+	// +(instancetype)sceneUpdateForViewMode:(VMEViewMode)viewMode;
+	[Static]
+	[Export("sceneUpdateForViewMode:")]
+	VMESceneUpdate SceneUpdateForViewMode(VMEViewMode viewMode);
+
+	// +(instancetype)sceneUpdateForViewMode:(VMEViewMode)viewMode buildingID:(NSString *)buildingID;
+	[Static]
+	[Export("sceneUpdateForViewMode:buildingID:")]
+	VMESceneUpdate SceneUpdateForViewMode(VMEViewMode viewMode, string buildingID);
+
+	// +(instancetype)sceneUpdateForViewMode:(VMEViewMode)viewMode floorID:(NSString *)floorID;
+	[Static]
+	[Export("sceneUpdateForViewMode:floorID:")]
+	VMESceneUpdate SceneUpdateForViewMode(VMEViewMode viewMode, string floorID);
+}
+
+// @protocol VMEMapInterface <NSObject>
+/*
+Check whether adding [Model] to this declaration is appropriate.
+[Model] is used to generate a C# class that implements this protocol,
+and might be useful for protocols that consumers are supposed to implement,
+since consumers can subclass the generated class instead of implementing
+the generated interface. If consumers are not supposed to implement this
+protocol, then [Model] is redundant and will generate code that will never
+be used.
+*/
+[Protocol]
+[BaseType(typeof(NSObject))]
+interface VMEMapInterface
+{
+	// @required -(void)moveCamera:(VMECameraUpdate *)update animated:(BOOL)animated __attribute__((deprecated("Please use either animateCamera: or updateCamera:")));
+	[Abstract]
+	[Export("moveCamera:animated:")]
+	void MoveCamera(VMECameraUpdate update, bool animated);
+
+	// @required -(void)updateCamera:(VMECameraUpdate *)update;
+	[Abstract]
+	[Export("updateCamera:")]
+	void UpdateCamera(VMECameraUpdate update);
+
+	// @required -(void)animateCamera:(VMECameraUpdate *)update;
+	[Abstract]
+	[Export("animateCamera:")]
+	void AnimateCamera(VMECameraUpdate update);
+
+	// @required -(void)updateScene:(VMESceneUpdate *)update;
+	[Abstract]
+	[Export("updateScene:")]
+	void UpdateScene(VMESceneUpdate update);
+
+	// @required -(void)animateScene:(VMESceneUpdate *)update;
+	[Abstract]
+	[Export("animateScene:")]
+	void AnimateScene(VMESceneUpdate update);
+}
+
 // @protocol VMEMapListener <NSObject>
 /*
 Check whether adding [Model] to this declaration is appropriate.
@@ -68087,51 +68030,6 @@ interface VMEMapListener
 	// @optional -(BOOL)map:(VMEMapView *)mapView didSelectPlace:(NSString *)placeID withPosition:(VMEPosition *)position;
 	[Export("map:didSelectPlace:withPosition:")]
 	bool Map(VMEMapView mapView, string placeID, VMEPosition position);
-}
-
-// @interface VMEMapView : UIView
-[BaseType(typeof(UIView))]
-interface VMEMapView
-{
-	// +(NSString *)getVersion;
-	[Static]
-	[Export("getVersion")]
-	[Verify(MethodToProperty)]
-	string Version { get; }
-
-	// +(NSString *)getMinDataSDKVersion;
-	[Static]
-	[Export("getMinDataSDKVersion")]
-	[Verify(MethodToProperty)]
-	string MinDataSDKVersion { get; }
-
-	// -(instancetype)initWithFrame:(CGRect)frame;
-	[Export("initWithFrame:")]
-	IntPtr Constructor(CGRect frame);
-
-	// -(void)loadMap;
-	[Export("loadMap")]
-	void LoadMap();
-
-	// @property (nonatomic) NSString * mapPath;
-	[Export("mapPath")]
-	string MapPath { get; set; }
-
-	// @property (nonatomic) NSString * mapSecretCode;
-	[Export("mapSecretCode")]
-	string MapSecretCode { get; set; }
-
-	// @property (nonatomic) NSString * mapHash;
-	[Export("mapHash")]
-	string MapHash { get; set; }
-
-	// @property (nonatomic) NSString * mapServerURL;
-	[Export("mapServerURL")]
-	string MapServerURL { get; set; }
-
-	// @property (nonatomic, weak) id<VMEMapListener> mapListener __attribute__((iboutlet));
-	[Export("mapListener", ArgumentSemantic.Weak)]
-	VMEMapListener MapListener { get; set; }
 }
 
 // @protocol VMEOverlayViewInterface <NSObject>
@@ -68366,3 +68264,48 @@ interface VMESearchViewInterface
 	void Callback(string title, VMESearchViewCallback callback);
 }
 
+// @interface VMEMapView : UIView <VMEComputeRouteInterface, VMELocationInterface, VMEMapInterface, VMEOverlayViewInterface, VMEPlaceInterface, VMESearchViewInterface>
+[BaseType(typeof(UIView))]
+interface VMEMapView : IVMEComputeRouteInterface, IVMELocationInterface, IVMEMapInterface, IVMEOverlayViewInterface, IVMEPlaceInterface, IVMESearchViewInterface
+{
+	// +(NSString *)getVersion;
+	[Static]
+	[Export("getVersion")]
+	[Verify(MethodToProperty)]
+	string Version { get; }
+
+	// +(NSString *)getMinDataSDKVersion;
+	[Static]
+	[Export("getMinDataSDKVersion")]
+	[Verify(MethodToProperty)]
+	string MinDataSDKVersion { get; }
+
+	// -(instancetype)initWithFrame:(CGRect)frame;
+	[Export("initWithFrame:")]
+	IntPtr Constructor(CGRect frame);
+
+	// -(void)loadMap;
+	[Export("loadMap")]
+	void LoadMap();
+
+	// @property (nonatomic) NSString * mapPath;
+	[Export("mapPath")]
+	string MapPath { get; set; }
+
+	// @property (nonatomic) NSString * mapSecretCode;
+	[Export("mapSecretCode")]
+	string MapSecretCode { get; set; }
+
+	// @property (nonatomic) NSString * mapHash;
+	[Export("mapHash")]
+	string MapHash { get; set; }
+
+	// @property (nonatomic) NSString * mapServerURL;
+	[Export("mapServerURL")]
+	string MapServerURL { get; set; }
+
+	// @property (nonatomic, weak) id<VMEMapListener> mapListener __attribute__((iboutlet));
+	[Export("mapListener", ArgumentSemantic.Weak)]
+	VMEMapListener MapListener { get; set; }
+}
+}

@@ -1,4 +1,5 @@
-﻿
+﻿using BindingsTest.Interfaces;
+using BindingsTest.iOS.SdkClasses;
 using Foundation;
 using Prism;
 using Prism.Ioc;
@@ -10,7 +11,7 @@ namespace BindingsTest.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -21,7 +22,7 @@ namespace BindingsTest.iOS
         //
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(uiApplication, launchOptions);
@@ -33,6 +34,7 @@ namespace BindingsTest.iOS
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Register any platform specific implementations
+            containerRegistry.Register<ISdkTest, TestClass>();
         }
     }
 }

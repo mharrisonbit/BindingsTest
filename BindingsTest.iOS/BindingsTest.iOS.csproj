@@ -65,6 +65,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SdkClasses\TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -130,5 +131,12 @@
       <Project>{FA03DC88-73AA-4BA9-AEA9-9A4916E8BF3B}</Project>
       <Name>BindingsTest</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VIsio.iOS\VIsio.iOS.csproj">
+      <Project>{A23398E9-0C42-4D13-88AF-8E0A32B5A16D}</Project>
+      <Name>VIsio.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SdkClasses\" />
   </ItemGroup>
 </Project>

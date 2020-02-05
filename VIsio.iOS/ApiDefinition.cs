@@ -4,12 +4,12 @@ using CoreLocation;
 using Foundation;
 using ObjCRuntime;
 using UIKit;
-using VisioMoveEssential;
+using static NativeLibrary.Structs;
 
 namespace VisioMoveEssential
 {
-	// @interface VMEPosition : NSObject <NSCopying>
-	[BaseType(typeof(NSObject))]
+    // @interface VMEPosition : NSObject <NSCopying>
+    [BaseType(typeof(NSObject))]
 	interface VMEPosition : INSCopying
 	{
 		// -(instancetype)initWithLatitude:(double)latitude longitude:(double)longitude altitude:(double)altitude buildingID:(NSString *)buildingID floorID:(NSString *)floorID;
@@ -63,7 +63,7 @@ namespace VisioMoveEssential
 
 		// -(id)getOrigin;
 		[Export("getOrigin")]
-		[Verify(MethodToProperty)]
+		//[Verify(MethodToProperty)]
 		NSObject Origin { get; }
 
 		// -(void)setOriginWithPlaceID:(NSString *)placeID __attribute__((deprecated("Please use setOrigin:")));
@@ -80,7 +80,7 @@ namespace VisioMoveEssential
 
 		// -(NSArray *)getDestinations;
 		[Export("getDestinations")]
-		[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+		//[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
 		NSObject[] Destinations { get; }
 
 		// -(BOOL)addDestination:(id)destination;
@@ -89,7 +89,7 @@ namespace VisioMoveEssential
 
 		// -(BOOL)addDestinations:(NSArray *)destinations;
 		[Export("addDestinations:")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		bool AddDestinations(NSObject[] destinations);
 
 		// -(void)removeAllDestinations;
@@ -131,7 +131,7 @@ namespace VisioMoveEssential
 	{
 		// -(instancetype)initWithDestinations:(NSArray *)destinations duration:(double)duration length:(double)length;
 		[Export("initWithDestinations:duration:length:")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		IntPtr Constructor(NSObject[] destinations, double duration, double length);
 
 		// -(BOOL)isEqualToRouteResult:(VMERouteRequest *)routeRequest;
@@ -148,7 +148,7 @@ namespace VisioMoveEssential
 
 		// @property (readonly) NSArray * destinations;
 		[Export("destinations")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		NSObject[] Destinations { get; }
 	}
 
@@ -286,7 +286,7 @@ namespace VisioMoveEssential
 
 		// -(instancetype)initWithPositions:(NSArray *)positions marginTop:(NSUInteger)marginTop marginBottom:(NSUInteger)marginBottom marginLeft:(NSUInteger)marginLeft marginRight:(NSUInteger)marginRight heading:(NSNumber *)heading __attribute__((deprecated("Please use cameraUpdateForPositions:heading:paddingTop:paddingBottom:paddingLeft:paddingRight")));
 		[Export("initWithPositions:marginTop:marginBottom:marginLeft:marginRight:heading:")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		IntPtr Constructor(NSObject[] positions, nuint marginTop, nuint marginBottom, nuint marginLeft, nuint marginRight, NSNumber heading);
 
 		// +(instancetype)cameraUpdateReset;
@@ -307,12 +307,12 @@ namespace VisioMoveEssential
 		// +(instancetype)cameraUpdateForViewMode:(VMEViewMode)viewMode heading:(VMECameraHeading *)heading buildingID:(NSString *)buildingID;
 		[Static]
 		[Export("cameraUpdateForViewMode:heading:buildingID:")]
-		VMECameraUpdate CameraUpdateForViewMode(VMEViewMode viewMode, VMECameraHeading heading, string buildingID);
+		VMECameraUpdate CameraUpdateForViewModeBuildingID(VMEViewMode viewMode, VMECameraHeading heading, string buildingID);
 
 		// +(instancetype)cameraUpdateForViewMode:(VMEViewMode)viewMode heading:(VMECameraHeading *)heading floorID:(NSString *)floorID;
 		[Static]
 		[Export("cameraUpdateForViewMode:heading:floorID:")]
-		VMECameraUpdate CameraUpdateForViewMode(VMEViewMode viewMode, VMECameraHeading heading, string floorID);
+		VMECameraUpdate CameraUpdateForViewModeFloorID(VMEViewMode viewMode, VMECameraHeading heading, string floorID);
 
 		// +(instancetype)cameraUpdateForPlaceID:(NSString *)placeID;
 		[Static]
@@ -327,7 +327,7 @@ namespace VisioMoveEssential
 		// +(instancetype)cameraUpdateForPositions:(NSArray *)positions heading:(VMECameraHeading *)heading paddingTop:(CGFloat)top paddingBottom:(CGFloat)bottom paddingLeft:(CGFloat)left paddingRight:(CGFloat)right;
 		[Static]
 		[Export("cameraUpdateForPositions:heading:paddingTop:paddingBottom:paddingLeft:paddingRight:")]
-		[Verify(StronglyTypedNSArray)]
+		//[Verify(StronglyTypedNSArray)]
 		VMECameraUpdate CameraUpdateForPositions(NSObject[] positions, VMECameraHeading heading, nfloat top, nfloat bottom, nfloat left, nfloat right);
 
 		// +(instancetype)cameraUpdateForPosition:(VMEPosition *)position heading:(VMECameraHeading *)heading minAltitude:(double)minAltitude maxAltitude:(double)maxAltitude;
@@ -348,12 +348,12 @@ namespace VisioMoveEssential
 		// +(instancetype)sceneUpdateForViewMode:(VMEViewMode)viewMode buildingID:(NSString *)buildingID;
 		[Static]
 		[Export("sceneUpdateForViewMode:buildingID:")]
-		VMESceneUpdate SceneUpdateForViewMode(VMEViewMode viewMode, string buildingID);
+		VMESceneUpdate SceneUpdateForViewModeBuildingId(VMEViewMode viewMode, string buildingID);
 
 		// +(instancetype)sceneUpdateForViewMode:(VMEViewMode)viewMode floorID:(NSString *)floorID;
 		[Static]
 		[Export("sceneUpdateForViewMode:floorID:")]
-		VMESceneUpdate SceneUpdateForViewMode(VMEViewMode viewMode, string floorID);
+		VMESceneUpdate SceneUpdateForViewModeFloorId(VMEViewMode viewMode, string floorID);
 	}
 
 	// @protocol VMEMapInterface <NSObject>
@@ -606,7 +606,7 @@ namespace VisioMoveEssential
 		// @required -(NSArray *)queryAllPlaceIDs;
 		[Abstract]
 		[Export("queryAllPlaceIDs")]
-		[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
+		//[Verify(MethodToProperty), Verify(StronglyTypedNSArray)]
 		NSObject[] QueryAllPlaceIDs { get; }
 	}
 
@@ -657,18 +657,18 @@ namespace VisioMoveEssential
 
 	// @interface VMEMapView : UIView <VMEComputeRouteInterface, VMELocationInterface, VMEMapInterface, VMEOverlayViewInterface, VMEPlaceInterface, VMESearchViewInterface>
 	[BaseType(typeof(UIView))]
-	interface VMEMapView : IVMEComputeRouteInterface, IVMELocationInterface, IVMEMapInterface, IVMEOverlayViewInterface, IVMEPlaceInterface, IVMESearchViewInterface
+	interface VMEMapView : VMEComputeRouteInterface, VMELocationInterface, VMEMapInterface, VMEOverlayViewInterface, VMEPlaceInterface, VMESearchViewInterface
 	{
 		// +(NSString *)getVersion;
 		[Static]
 		[Export("getVersion")]
-		[Verify(MethodToProperty)]
+		//[Verify(MethodToProperty)]
 		string Version { get; }
 
 		// +(NSString *)getMinDataSDKVersion;
 		[Static]
 		[Export("getMinDataSDKVersion")]
-		[Verify(MethodToProperty)]
+		//[Verify(MethodToProperty)]
 		string MinDataSDKVersion { get; }
 
 		// -(instancetype)initWithFrame:(CGRect)frame;
